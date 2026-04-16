@@ -1,66 +1,170 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Energy Management System (EnMS) for Optimise Sdn. Bhd.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Final Year Project — Bachelor of Computer Science (Software Engineering) with Honours  
+> Faculty of Computing, Universiti Teknologi Malaysia (UTM)  
+> Author: Mohamed Arshath Bin Mohamed Saleem (A22EC0076)  
+> Supervisor: Puan Lizawati Binti Mi Yusuf | January 2026
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+A web-based **Energy Management System (EnMS)** developed in collaboration with **Optimise Systems Engineering Sdn. Bhd.**, a Malaysian energy management consultancy and registered ESCO under the Malaysian Energy Commission.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The system automates the **PLAN phase of the ISO 50001 PDCA cycle**, replacing error-prone manual spreadsheet workflows with a centralized digital platform for energy data management, energy review, Significant Energy Use (SEU) identification, and regression-based baseline performance evaluation.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Problem Statement
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Optimise Sdn. Bhd. relied on manual, spreadsheet-based processes for:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Collecting and consolidating energy consumption data (electricity, fuel, water)
+- Calculating Specific Energy Consumption (SEC) and Energy Intensity Performance (EIP)
+- Identifying Significant Energy Uses (SEUs)
+- Building and maintaining baseline performance models
 
-## Laravel Sponsors
+This caused **data discrepancies, calculation errors, slow workflows**, and difficulty maintaining ISO 50001-compliant documentation.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## Project Objectives
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1. **Identify** the requirements of the EnMS supporting energy data management, energy review, and performance baseline analysis in compliance with ISO 50001 standards.
+2. **Design and develop** a web-based EnMS incorporating data processing, SEU identification, and baseline performance evaluation based on Optimise Sdn. Bhd.'s operational needs.
+3. **Test, verify, and validate** system functionalities to ensure accuracy, ISO 50001 compliance, and operational efficiency.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Key Features
 
-## Code of Conduct
+### 🗂️ Energy Data Management Module
+- Centralized logging of energy consumption data (electricity, fuel, water) across departments
+- Management of production data, operational variables, and energy resource records
+- Built-in data validation to prevent duplicate or inconsistent entries
+- Linking of energy consumption to production performance metrics
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 📊 Energy Review & SEU Identification Module
+- Automated calculation of **Specific Energy Consumption (SEC)** and **Energy Intensity Performance (EIP)**
+- Sequential load apportionment across departments (mineral, steel, cement industries)
+- Automated **SEU flagging** based on configurable threshold criteria
+- ISO 50001-compliant energy review workflows
 
-## Security Vulnerabilities
+### 📈 EnPI & Baseline Management Module
+- Regression-based baseline modeling with statistical validation (R² values, residual analysis)
+- Comparison of actual energy performance against established baselines
+- Automated baseline and EnPI updates when new data is incorporated
+- Audit-ready documentation for ISO 50001 compliance
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 🔐 Role-Based Access Control (RBAC)
+Five distinct user roles with differentiated permissions:
 
-## License
+| Role | Description |
+|---|---|
+| Superadmin | Full system administration |
+| Top Management | Strategic dashboard and summary reports |
+| Energy Management Team | Data entry, validation, and reporting |
+| Internal REM | Baseline analysis and performance evaluation |
+| External REM | SEU verification and EnPI review |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 📱 Responsive Design
+Accessible across desktops, laptops, tablets, and smartphones.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Backend Framework | Laravel (PHP) |
+| Database | MySQL |
+| Frontend | HTML5, CSS3, JavaScript |
+| Architecture | 3-Tier (MVC-based) |
+| Design Pattern | MVC (Model-View-Controller) |
+
+---
+
+## System Architecture
+
+The system follows a **3-Tier Architecture**:
+- **Presentation Layer** — HTML5/CSS3/JavaScript frontend
+- **Application Layer** — Laravel MVC backend with business logic
+- **Data Layer** — MySQL relational database
+
+---
+
+## Development Methodology
+
+The system was developed using the **Waterfall Model**, progressing through:
+
+1. Requirements Gathering & Analysis
+2. System Design (UML diagrams, ERD, interface mockups)
+3. Implementation
+4. Testing (Functional, Integration, User Acceptance)
+5. Deployment
+6. Maintenance
+
+---
+
+## Testing
+
+The system was validated through three levels of testing:
+
+- **Functional Testing** — Verifies each feature works correctly in isolation
+- **Integration Testing** — Ensures modules work together as expected
+- **User Acceptance Testing (UAT)** — Confirms the system meets end-user requirements
+
+---
+
+## Project Scope
+
+- Covers only the **PLAN phase** of the ISO 50001 PDCA cycle
+- Designed specifically for Optimise Systems Engineering Sdn. Bhd.'s operational context
+- Supports industries including mineral, steel, and cement processing
+- Standalone platform; external system integration can be added in future iterations
+
+---
+
+## Abbreviations
+
+| Term | Meaning |
+|---|---|
+| EnMS | Energy Management System |
+| EnPI | Energy Performance Indicator |
+| EIP | Energy Intensity Performance |
+| ESCO | Energy Services Company |
+| ISO | International Organization for Standardization |
+| PDCA | Plan-Do-Check-Act |
+| RBAC | Role-Based Access Control |
+| REM | Registered Energy Manager |
+| SEC | Specific Energy Consumption |
+| SEU | Significant Energy Use |
+| UTM | Universiti Teknologi Malaysia |
+
+---
+
+## Academic Information
+
+| Field | Detail |
+|---|---|
+| Institution | Universiti Teknologi Malaysia (UTM) |
+| Faculty | Faculty of Computing |
+| Programme | Bachelor of Computer Science (Software Engineering) with Honours |
+| Matric No. | A22EC0076 |
+| Academic Session | 2025/2026-2 |
+| Supervisor | Puan Lizawati Binti Mi Yusuf |
+| Submission Date | January 2026 |
+
+---
+
+## Related Systems Analyzed
+
+The following existing EnMS platforms were reviewed during the literature study:
+
+- **Enerit** — ISO 50001-compliant EnMS with SEU documentation and dashboards
+- **Process.st** — Workflow automation platform for checklist and approval management
+- **Tor.ai** — AI-powered industrial analytics platform with IoT integration
+
+---
+
+> This project was submitted in fulfilment of the requirements for the Bachelor of Computer Science (Software Engineering) with Honours degree at Universiti Teknologi Malaysia.
