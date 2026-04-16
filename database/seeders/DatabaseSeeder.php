@@ -9,12 +9,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            MenuSeeder::class,
-            PermissionSeeder::class,
-            RoleSeeder::class,
-            RolesAndPermissionsSeeder::class,
-
-            UsersTableSeeder::class,
+            RoleSeeder::class,              // creates the 5 actor roles
+            MenuSeeder::class,              // menus — PermissionSeeder reads Menu::all()
+            PermissionSeeder::class,        // creates permissions from menus
+            RolePermissionSeeder::class,    // assigns permissions to roles (needs both above)
+            UsersTableSeeder::class,        // creates users + syncs role_user pivot
             UserPermissionSeeder::class,
 
             LegalItemSeeder::class,

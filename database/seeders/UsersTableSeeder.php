@@ -11,42 +11,61 @@ class UsersTableSeeder extends Seeder
 {
     public function run(): void
     {
-        // Get roles (matching RoleSeeder: superadmin, top-management, rem, user)
-        $superadminRole = Role::where('name', 'superadmin')->first();
-        $remRole = Role::where('name', 'rem')->first();
-        $userRole = Role::where('name', 'user')->first();
-
-        // 1. Superadmin
-        User::updateOrCreate(
-            ['email' => 'superadmin@example.com'],
+        $usersData = [
             [
-                'name' => 'Super Admin',
-                'password' => Hash::make('superadmin123'),
-                'role' => 'superadmin',
-                'default_role_id' => $superadminRole?->id,
-            ]
-        );
-
-        // 2. REM User (previously admin - using valid role from RoleSeeder)
-        User::updateOrCreate(
-            ['email' => 'admin@example.com'],
+                'name'     => 'Super Admin',
+                'email'    => 'superadmin@optimise.test',
+                'password' => Hash::make('password'),
+                'role'     => 'superadmin',         // legacy string column — used by isSuperAdmin()
+                'roleName' => 'superadmin',
+            ],
             [
-                'name' => 'Admin User',
-                'password' => Hash::make('admin123'),
-                'role' => 'rem',
-                'default_role_id' => $remRole?->id,
-            ]
-        );
-
-        // 3. Normal User
-        User::updateOrCreate(
-            ['email' => 'user@example.com'],
+                'name'     => 'Top Management',
+                'email'    => 'topmanagement@optimise.test',
+                'password' => Hash::make('password'),
+                'role'     => 'top-management',
+                'roleName' => 'top-management',
+            ],
             [
-                'name' => 'Normal User',
-                'password' => Hash::make('user123'),
-                'role' => 'user',
-                'default_role_id' => $userRole?->id,
-            ]
-        );
+                'name'     => 'EMT User',
+                'email'    => 'emt@optimise.test',
+                'password' => Hash::make('password'),
+                'role'     => 'emt',
+                'roleName' => 'emt',
+            ],
+            [
+                'name'     => 'Internal REM',
+                'email'    => 'internal.rem@optimise.test',
+                'password' => Hash::make('password'),
+                'role'     => 'internal-rem',
+                'roleName' => 'internal-rem',
+            ],
+            [
+                'name'     => 'External REM',
+                'email'    => 'external.rem@optimise.test',
+                'password' => Hash::make('password'),
+                'role'     => 'external-rem',
+                'roleName' => 'external-rem',
+            ],
+        ];
+
+        foreach ($usersData as $data) {
+            $roleModel = Role::where('name', $data['roleName'])->first();
+
+            $user = User::updateOrCreate(
+                ['email' => $data['email']],
+                [
+                    'name'            => $data['name'],
+                    'password'        => $data['password'],
+                    'role'            => $data['role'],
+                    'default_role_id' => $roleModel?->id,
+                ]
+            );
+
+            // Sync role into pivot table (role_user) so middleware + permission checks work
+            if ($roleModel) {
+                $user->roles()->sync([$roleModel->id]);
+            }
+        }
     }
 }

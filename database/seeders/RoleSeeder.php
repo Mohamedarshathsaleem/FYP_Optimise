@@ -3,44 +3,38 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
-use App\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
 {
     public function run()
     {
-        // Create roles
-        $superadmin = Role::updateOrCreate(['name' => 'superadmin'], ['description' => 'Super Admin Role']);
-        $management = Role::updateOrCreate(['name' => 'top-management'], ['description' => 'Top Management Role']);
-        $rem = Role::updateOrCreate(['name' => 'rem'], ['description' => 'Internal REM Role']);
-        $user = Role::updateOrCreate(['name' => 'user'], ['description' => 'Regular User']);
+        // Create the 5 actor roles — permission assignment happens in RolePermissionSeeder
+        // which runs after PermissionSeeder so permissions actually exist.
 
-        // Superadmin gets all permissions
-        $allPermissionIds = Permission::pluck('id');
-        $superadmin->permissions()->sync($allPermissionIds);
+        Role::updateOrCreate(
+            ['name' => 'superadmin'],
+            ['description' => 'Full system access — manages users, permissions, all modules, and system configuration.']
+        );
 
-        // Management gets view-only permissions for all menus + export permissions
-        $managementPerms = Permission::where('name', 'like', '%.view')
-            ->orWhere('name', 'like', '%.export')
-            ->orWhere('name', 'like', '%.approval')
-            ->pluck('id');
-        $management->permissions()->sync($managementPerms);
+        Role::updateOrCreate(
+            ['name' => 'top-management'],
+            ['description' => 'Reviews high-level energy performance data, approves baseline models and energy policy.']
+        );
 
-        // REM gets view, add, edit permissions (no delete)
-        $remPerms = Permission::where('name', 'like', '%.view')
-            ->orWhere('name', 'like', '%.add')
-            ->orWhere('name', 'like', '%.edit')
-            ->pluck('id');
-        $rem->permissions()->sync($remPerms);
+        Role::updateOrCreate(
+            ['name' => 'emt'],
+            ['description' => 'Energy Management Team — enters and manages energy data, production data, and monthly variables.']
+        );
 
-        // Regular user gets limited permissions
-        $userPermissionNames = [
-            'dashboard.view',
-            'energy-policy.view',
-            'enpi-baseline-management.view',
-        ];
-        $userPermIds = Permission::whereIn('name', $userPermissionNames)->pluck('id');
-        $user->permissions()->sync($userPermIds);
+        Role::updateOrCreate(
+            ['name' => 'internal-rem'],
+            ['description' => 'Internal REM — technical evaluations, SEC/EIP analysis, SEU identification, baseline model development.']
+        );
+
+        Role::updateOrCreate(
+            ['name' => 'external-rem'],
+            ['description' => 'External REM — independent validation, audit energy performance, verify SEC/EIP and SEU results.']
+        );
     }
 }

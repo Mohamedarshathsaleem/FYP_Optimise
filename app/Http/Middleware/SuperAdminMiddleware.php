@@ -15,7 +15,7 @@ class SuperAdminMiddleware
             return redirect('/login');
         }
 
-        if (!auth()->user()->roles->contains('name', 'superadmin')) {
+        if (!auth()->user()->isSuperAdmin()) {
             abort(403, 'Only Super Admin can access this area');
         }
 

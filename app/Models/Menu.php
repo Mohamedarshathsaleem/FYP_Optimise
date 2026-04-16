@@ -9,7 +9,8 @@ class Menu extends Model
 {
     protected $fillable = [
         'name', 'slug', 'icon', 'route',
-        'parent_id', 'order', 'is_active'
+        'parent_id', 'order', 'is_active',
+        'is_superadmin_only', 'level',
     ];
 
     public function parent()
