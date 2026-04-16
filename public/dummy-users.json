@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "Super Admin",
+        "role": "superadmin",
+        "email": "superadmin@demo.com",
+        "password": "password123",
+        "permissions": {
+            "dashboard": { "can_view": true },
+            "issues": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": true },
+            "boundaries": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": true },
+            "legal": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": true },
+            "stakeholders": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": true },
+            "committee": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": true },
+            "motivation": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": true },
+            "communication": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": true },
+            "training": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": true }
+        }
+    },
+    {
+        "id": 2,
+        "name": "Top Management",
+        "email": "manager@demo.com",
+        "password": "password123",
+        "role": "management",
+        "permissions": {
+            "dashboard": { "can_view": true },
+            "issues": { "can_view": true, "can_add": false, "can_edit": false, "can_delete": false },
+            "boundaries": { "can_view": true, "can_add": false, "can_edit": false, "can_delete": false },
+            "legal": { "can_view": true, "can_add": false, "can_edit": false, "can_delete": false },
+            "stakeholders": { "can_view": true, "can_add": false, "can_edit": false, "can_delete": false },
+            "committee": { "can_view": true, "can_add": false, "can_edit": false, "can_delete": false },
+            "motivation": { "can_view": true, "can_add": false, "can_edit": false, "can_delete": false },
+            "communication": { "can_view": true, "can_add": false, "can_edit": false, "can_delete": false },
+            "training": { "can_view": true, "can_add": false, "can_edit": false, "can_delete": false }
+        }
+    },
+    {
+        "id": 3,
+        "name": "Internal REM",
+        "email": "rem@demo.com",
+        "password": "password123",
+        "role": "rem",
+        "permissions": {
+            "dashboard": { "can_view": true },
+            "issues": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": false },
+            "boundaries": { "can_view": false, "can_add": true, "can_edit": true, "can_delete": false },
+            "legal": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": false },
+            "stakeholders": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": false },
+            "committee": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": false },
+            "motivation": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": false },
+            "communication": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": false },
+            "training": { "can_view": true, "can_add": true, "can_edit": true, "can_delete": false }
+        }
+    }
+]

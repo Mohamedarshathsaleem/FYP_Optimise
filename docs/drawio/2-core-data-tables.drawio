@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Core Data Tables (ERD)" id="erd">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="1">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a2e;strokeColor=none;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="350" y="30" width="900" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="title" value="&lt;font color=&quot;#ffffff&quot; style=&quot;font-size:20px&quot;&gt;&lt;b&gt;CORE DATA TABLES — Entity Relationship Diagram&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="450" y="38" width="700" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ========== ENERGY DATA (Config) ========== -->
+        <mxCell id="ed_header" value="&lt;b&gt;&lt;font style=&quot;font-size:13px&quot;&gt;energy_data&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Energy Meter Configuration&lt;/font&gt;" style="shape=table;startSize=45;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;fillColor=#4472C4;strokeColor=#2F5496;fontColor=#ffffff;shadow=1;rounded=1;arcSize=6;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="60" y="120" width="320" height="270" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=#D6E4F0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="ed_header">
+          <mxGeometry y="45" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r1c1" value="&lt;font color=&quot;#C55A11&quot;&gt;&lt;b&gt;PK&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontSize=10;fontStyle=1;" vertex="1" parent="ed_r1">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r1c2" value="&lt;b&gt;id&lt;/b&gt;  (bigint, auto-increment)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontSize=11;" vertex="1" parent="ed_r1">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ed_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="ed_header">
+          <mxGeometry y="73" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r2c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="ed_r2">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r2c2" value="category  (varchar, default 'Industrial')" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="ed_r2">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ed_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="ed_header">
+          <mxGeometry y="101" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r3c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="ed_r3">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r3c2" value="name  (varchar, e.g. 'TNB Meter 1')" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="ed_r3">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ed_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="ed_header">
+          <mxGeometry y="129" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r4c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="ed_r4">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r4c2" value="type  (varchar, e.g. 'Electricity', 'Steam')" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="ed_r4">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ed_r5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="ed_header">
+          <mxGeometry y="157" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r5c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="ed_r5">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r5c2" value="unit  (varchar, e.g. 'kWh', 'MWh')" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="ed_r5">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ed_r6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FFF2CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="ed_header">
+          <mxGeometry y="185" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r6c1" value="&lt;font color=&quot;#BF8F00&quot;&gt;KEY&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="ed_r6">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r6c2" value="&lt;b&gt;conversion_factor&lt;/b&gt;  (decimal, to GJ)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="ed_r6">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ed_r7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="ed_header">
+          <mxGeometry y="213" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r7c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="ed_r7">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r7c2" value="tariff_rate  (decimal)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="ed_r7">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ed_r8" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#F2F2F2;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;fontColor=#999;" vertex="1" parent="ed_header">
+          <mxGeometry y="241" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r8c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="ed_r8">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ed_r8c2" value="&lt;font color=&quot;#999&quot;&gt;created_at, updated_at&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="ed_r8">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- ========== ENERGY DATA USAGES ========== -->
+        <mxCell id="edu_header" value="&lt;b&gt;&lt;font style=&quot;font-size:13px&quot;&gt;energy_data_usages&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Monthly Energy Consumption Records&lt;/font&gt;" style="shape=table;startSize=45;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;fillColor=#C00000;strokeColor=#8B0000;fontColor=#ffffff;shadow=1;rounded=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="470" width="320" height="242" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FCE4EC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="edu_header">
+          <mxGeometry y="45" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r1c1" value="&lt;font color=&quot;#C55A11&quot;&gt;&lt;b&gt;PK&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="edu_r1">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r1c2" value="&lt;b&gt;id&lt;/b&gt;  (bigint)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="edu_r1">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edu_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FCE4EC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="edu_header">
+          <mxGeometry y="73" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r2c1" value="&lt;font color=&quot;#2F5496&quot;&gt;&lt;b&gt;FK&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="edu_r2">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r2c2" value="&lt;b&gt;energy_data_id&lt;/b&gt;  → energy_data.id" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;fontColor=#2F5496;" vertex="1" parent="edu_r2">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edu_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="edu_header">
+          <mxGeometry y="101" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r3c1" value="&lt;font color=&quot;#548235&quot;&gt;&lt;b&gt;IDX&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="edu_r3">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r3c2" value="month  (varchar(7), e.g. '2026-01')" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="edu_r3">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edu_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="edu_header">
+          <mxGeometry y="129" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r4c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="edu_r4">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r4c2" value="usage_value  (decimal 12,3 — raw input)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="edu_r4">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edu_r5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FFF2CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="edu_header">
+          <mxGeometry y="157" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r5c1" value="&lt;font color=&quot;#BF8F00&quot;&gt;KEY&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="edu_r5">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r5c2" value="&lt;b&gt;usage_gj&lt;/b&gt;  (decimal 12,3 — converted GJ)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="edu_r5">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edu_r6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FFF2CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="edu_header">
+          <mxGeometry y="185" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r6c1" value="&lt;font color=&quot;#BF8F00&quot;&gt;KEY&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="edu_r6">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r6c2" value="&lt;b&gt;cost&lt;/b&gt;  (decimal 12,2 — RM cost)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="edu_r6">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edu_r7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#F2F2F2;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="edu_header">
+          <mxGeometry y="213" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r7c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="edu_r7">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu_r7c2" value="&lt;font color=&quot;#999&quot;&gt;usage_unit, notes, timestamps&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="edu_r7">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- 1:N Relationship -->
+        <mxCell id="rel1" value="&lt;font style=&quot;font-size:12px&quot;&gt;&lt;b&gt;1 : N&lt;/b&gt;&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#2F5496;fontSize=12;fontStyle=1;rounded=1;" edge="1" source="ed_header" target="edu_header" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ========== ENERGY RESOURCE DATA (Config) ========== -->
+        <mxCell id="erd_header" value="&lt;b&gt;&lt;font style=&quot;font-size:13px&quot;&gt;energy_resource_data&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Energy Resource Configuration&lt;/font&gt;" style="shape=table;startSize=45;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;fillColor=#4472C4;strokeColor=#2F5496;fontColor=#ffffff;shadow=1;rounded=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="520" y="120" width="320" height="270" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D6E4F0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erd_header">
+          <mxGeometry y="45" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r1c1" value="&lt;font color=&quot;#C55A11&quot;&gt;&lt;b&gt;PK&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="erd_r1">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r1c2" value="&lt;b&gt;id&lt;/b&gt;  (bigint, auto-increment)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erd_r1">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erd_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erd_header">
+          <mxGeometry y="73" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r2c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="erd_r2">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r2c2" value="category  (varchar, default 'Industrial')" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erd_r2">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erd_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erd_header">
+          <mxGeometry y="101" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r3c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="erd_r3">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r3c2" value="name  (varchar, e.g. 'Natural Gas')" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erd_r3">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erd_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erd_header">
+          <mxGeometry y="129" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r4c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="erd_r4">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r4c2" value="resource_type  (varchar)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erd_r4">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erd_r5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erd_header">
+          <mxGeometry y="157" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r5c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="erd_r5">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r5c2" value="unit, conversion_factor  (decimal)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erd_r5">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erd_r6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erd_header">
+          <mxGeometry y="185" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r6c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="erd_r6">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r6c2" value="tariff_rate  (decimal)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erd_r6">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erd_r7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#F2F2F2;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erd_header">
+          <mxGeometry y="213" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r7c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="erd_r7">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erd_r7c2" value="&lt;font color=&quot;#999&quot;&gt;created_at, updated_at&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erd_r7">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- ========== ENERGY RESOURCE USAGES ========== -->
+        <mxCell id="erus_header" value="&lt;b&gt;&lt;font style=&quot;font-size:13px&quot;&gt;energy_resource_usages&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Monthly Resource Consumption Records&lt;/font&gt;" style="shape=table;startSize=45;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;fillColor=#C00000;strokeColor=#8B0000;fontColor=#ffffff;shadow=1;rounded=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="520" y="470" width="320" height="242" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FCE4EC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erus_header">
+          <mxGeometry y="45" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r1c1" value="&lt;font color=&quot;#C55A11&quot;&gt;&lt;b&gt;PK&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="erus_r1">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r1c2" value="&lt;b&gt;id&lt;/b&gt;  (bigint)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erus_r1">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erus_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FCE4EC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erus_header">
+          <mxGeometry y="73" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r2c1" value="&lt;font color=&quot;#2F5496&quot;&gt;&lt;b&gt;FK&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="erus_r2">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r2c2" value="&lt;b&gt;energy_resource_data_id&lt;/b&gt;  → .id" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;fontColor=#2F5496;" vertex="1" parent="erus_r2">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erus_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erus_header">
+          <mxGeometry y="101" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r3c1" value="&lt;font color=&quot;#548235&quot;&gt;&lt;b&gt;IDX&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="erus_r3">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r3c2" value="month  (varchar(7), e.g. '2026-01')" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erus_r3">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erus_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erus_header">
+          <mxGeometry y="129" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r4c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="erus_r4">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r4c2" value="usage_value, usage_unit" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erus_r4">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erus_r5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FFF2CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erus_header">
+          <mxGeometry y="157" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r5c1" value="&lt;font color=&quot;#BF8F00&quot;&gt;KEY&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="erus_r5">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r5c2" value="&lt;b&gt;usage_gj&lt;/b&gt;  (decimal 12,3 — converted GJ)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erus_r5">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erus_r6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FFF2CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erus_header">
+          <mxGeometry y="185" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r6c1" value="&lt;font color=&quot;#BF8F00&quot;&gt;KEY&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="erus_r6">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r6c2" value="&lt;b&gt;cost&lt;/b&gt;  (decimal 12,2 — RM cost)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erus_r6">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erus_r7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#F2F2F2;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="erus_header">
+          <mxGeometry y="213" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r7c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="erus_r7">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="erus_r7c2" value="&lt;font color=&quot;#999&quot;&gt;notes, created_at, updated_at&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="erus_r7">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- 1:N Relationship -->
+        <mxCell id="rel2" value="&lt;font style=&quot;font-size:12px&quot;&gt;&lt;b&gt;1 : N&lt;/b&gt;&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#2F5496;fontSize=12;fontStyle=1;rounded=1;" edge="1" source="erd_header" target="erus_header" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ========== MONTHLY PRODUCTIONS ========== -->
+        <mxCell id="mp_header" value="&lt;b&gt;&lt;font style=&quot;font-size:13px&quot;&gt;monthly_productions&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Production Output by Product&lt;/font&gt;" style="shape=table;startSize=45;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;fillColor=#548235;strokeColor=#375623;fontColor=#ffffff;shadow=1;rounded=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="980" y="120" width="320" height="214" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E2EFDA;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="mp_header">
+          <mxGeometry y="45" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r1c1" value="&lt;font color=&quot;#C55A11&quot;&gt;&lt;b&gt;PK&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="mp_r1">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r1c2" value="&lt;b&gt;id&lt;/b&gt;  (bigint)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="mp_r1">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mp_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="mp_header">
+          <mxGeometry y="73" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r2c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="mp_r2">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r2c2" value="category, product_name" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="mp_r2">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mp_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="mp_header">
+          <mxGeometry y="101" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r3c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="mp_r3">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r3c2" value="month  (varchar(7), e.g. '2026-01')" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="mp_r3">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mp_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FFF2CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="mp_header">
+          <mxGeometry y="129" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r4c1" value="&lt;font color=&quot;#BF8F00&quot;&gt;KEY&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="mp_r4">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r4c2" value="&lt;b&gt;quantity&lt;/b&gt;  (decimal — production output)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="mp_r4">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mp_r5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#F2F2F2;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="mp_header">
+          <mxGeometry y="157" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r5c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="mp_r5">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mp_r5c2" value="&lt;font color=&quot;#999&quot;&gt;unit, created_at, updated_at&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="mp_r5">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- ========== MONTHLY VARIABLES ========== -->
+        <mxCell id="mv_header" value="&lt;b&gt;&lt;font style=&quot;font-size:13px&quot;&gt;monthly_variables&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Variable Values (Area, Headcount)&lt;/font&gt;" style="shape=table;startSize=45;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;fillColor=#548235;strokeColor=#375623;fontColor=#ffffff;shadow=1;rounded=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="980" y="400" width="320" height="186" as="geometry"/>
+        </mxCell>
+        <mxCell id="mv_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E2EFDA;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="mv_header">
+          <mxGeometry y="45" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mv_r1c1" value="&lt;font color=&quot;#C55A11&quot;&gt;&lt;b&gt;PK&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="mv_r1">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mv_r1c2" value="&lt;b&gt;id&lt;/b&gt;  (bigint)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="mv_r1">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mv_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="mv_header">
+          <mxGeometry y="73" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mv_r2c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="mv_r2">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mv_r2c2" value="category, variable_name" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="mv_r2">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mv_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="mv_header">
+          <mxGeometry y="101" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mv_r3c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="mv_r3">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mv_r3c2" value="month  (varchar(7))" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="mv_r3">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mv_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FFF2CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="mv_header">
+          <mxGeometry y="129" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mv_r4c1" value="&lt;font color=&quot;#BF8F00&quot;&gt;KEY&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="mv_r4">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="mv_r4c2" value="&lt;b&gt;value&lt;/b&gt;  (decimal — e.g. m², headcount)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="mv_r4">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- ========== LOAD APPORTIONING ========== -->
+        <mxCell id="la_header" value="&lt;b&gt;&lt;font style=&quot;font-size:13px&quot;&gt;load_apportioning&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;User-Entered Load Data&lt;/font&gt;" style="shape=table;startSize=45;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;fillColor=#ED7D31;strokeColor=#C55A11;fontColor=#ffffff;shadow=1;rounded=1;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="980" y="650" width="320" height="270" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FCE4CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="la_header">
+          <mxGeometry y="45" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r1c1" value="&lt;font color=&quot;#C55A11&quot;&gt;&lt;b&gt;PK&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="la_r1">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r1c2" value="&lt;b&gt;id&lt;/b&gt;  (bigint)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="la_r1">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="la_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FCE4CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="la_header">
+          <mxGeometry y="73" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r2c1" value="&lt;font color=&quot;#2F5496&quot;&gt;&lt;b&gt;FK&lt;/b&gt;&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="la_r2">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r2c2" value="&lt;b&gt;approach_id, energy_type_id&lt;/b&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;fontColor=#2F5496;" vertex="1" parent="la_r2">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="la_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="la_header">
+          <mxGeometry y="101" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r3c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="la_r3">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r3c2" value="year  (smallint), unit_mode  (enum)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="la_r3">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="la_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="la_header">
+          <mxGeometry y="129" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r4c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="la_r4">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r4c2" value="row_label  (varchar 200, user-typed)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="la_r4">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="la_r5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FFF2CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="la_header">
+          <mxGeometry y="157" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r5c1" value="&lt;font color=&quot;#BF8F00&quot;&gt;KEY&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="la_r5">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r5c2" value="&lt;b&gt;energy_consumption_gj&lt;/b&gt;  (decimal 14,4)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="la_r5">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="la_r6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FFF2CC;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="la_header">
+          <mxGeometry y="185" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r6c1" value="&lt;font color=&quot;#BF8F00&quot;&gt;KEY&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=9;fontStyle=1;" vertex="1" parent="la_r6">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r6c2" value="&lt;b&gt;load_percentage&lt;/b&gt;  (decimal 8,4)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=11;" vertex="1" parent="la_r6">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="la_r7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#F2F2F2;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" vertex="1" parent="la_header">
+          <mxGeometry y="213" width="320" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r7c1" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="la_r7">
+          <mxGeometry width="50" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="la_r7c2" value="&lt;font color=&quot;#999&quot;&gt;sort_order, created_by, updated_by, timestamps&lt;/font&gt;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;fontSize=10;" vertex="1" parent="la_r7">
+          <mxGeometry x="50" width="270" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="780" width="750" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend_title" value="&lt;b&gt;LEGEND&lt;/b&gt;" style="text;html=1;fontSize=12;align=left;fontColor=#333;" vertex="1" parent="1">
+          <mxGeometry x="80" y="785" width="80" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="l1_icon" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4472C4;strokeColor=#2F5496;" vertex="1" parent="1">
+          <mxGeometry x="80" y="815" width="18" height="14" as="geometry"/>
+        </mxCell>
+        <mxCell id="l1_text" value="Config / Master Tables" style="text;html=1;fontSize=10;align=left;fontColor=#555;" vertex="1" parent="1">
+          <mxGeometry x="105" y="813" width="140" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="l2_icon" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C00000;strokeColor=#8B0000;" vertex="1" parent="1">
+          <mxGeometry x="260" y="815" width="18" height="14" as="geometry"/>
+        </mxCell>
+        <mxCell id="l2_text" value="Transaction / Usage Tables" style="text;html=1;fontSize=10;align=left;fontColor=#555;" vertex="1" parent="1">
+          <mxGeometry x="285" y="813" width="160" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="l3_icon" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#548235;strokeColor=#375623;" vertex="1" parent="1">
+          <mxGeometry x="460" y="815" width="18" height="14" as="geometry"/>
+        </mxCell>
+        <mxCell id="l3_text" value="Production / Variable Tables" style="text;html=1;fontSize=10;align=left;fontColor=#555;" vertex="1" parent="1">
+          <mxGeometry x="485" y="813" width="160" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="l4_icon" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ED7D31;strokeColor=#C55A11;" vertex="1" parent="1">
+          <mxGeometry x="660" y="815" width="18" height="14" as="geometry"/>
+        </mxCell>
+        <mxCell id="l4_text" value="User-Entered Data" style="text;html=1;fontSize=10;align=left;fontColor=#555;" vertex="1" parent="1">
+          <mxGeometry x="685" y="813" width="110" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="l5" value="&lt;font color=&quot;#BF8F00&quot;&gt;&lt;b&gt;KEY&lt;/b&gt;&lt;/font&gt; = Key calculation field&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#C55A11&quot;&gt;&lt;b&gt;PK&lt;/b&gt;&lt;/font&gt; = Primary Key&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#2F5496&quot;&gt;&lt;b&gt;FK&lt;/b&gt;&lt;/font&gt; = Foreign Key&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#548235&quot;&gt;&lt;b&gt;IDX&lt;/b&gt;&lt;/font&gt; = Indexed" style="text;html=1;fontSize=10;align=left;fontColor=#555;" vertex="1" parent="1">
+          <mxGeometry x="80" y="840" width="700" height="20" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

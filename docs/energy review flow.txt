@@ -1,0 +1,37 @@
+Flow 1: Energy Data → Load Apportioning → SEU Flagging
+
+Energy Data Management (meters & monthly GJ values)
+        │
+        │  user manually assigns GJ to equipment
+        ▼
+Load Apportioning (splits energy by equipment/SEU category)
+        │
+        │  system groups by SEU category, checks against threshold (e.g. ≥5%)
+        ▼
+SEU Flagging (flags significant energy users)
+        │
+        ▼
+SEU Action Items (improvement actions for each flagged SEU)
+In plain words: You enter monthly energy bills. Then in Load Apportioning, you manually break down where that energy goes (compressors, chillers, lighting, etc.). The system then flags any category using ≥5% of total energy as a "Significant Energy Use" and you attach action items to improve them.
+
+Flow 2: Energy Data + Production → SEC Analysis
+
+Energy Data Usages (monthly GJ)
+Energy Resource Usages (monthly GJ)       ──► SEC Analysis (computed live, not stored)
+Monthly Production Usages (monthly qty)   ──►   = Energy per unit of product
+POE Allocations (user-set % per product)  ──►
+In plain words: SEC = "how much energy per tonne of product?" The system takes your energy bills, your production quantities, and your POE allocation percentages, then calculates SEC in memory. Nothing is saved to a separate table — it reads live every time.
+
+Flow 3: Energy Data + Variables → EIP Analysis
+
+Energy Data Usages (monthly GJ)
+Energy Resource Usages (monthly GJ)         ──► EIP Analysis (computed live, not stored)
+Monthly Variable Usages (temp, humidity)     ──►   = Energy intensity vs variables
+EIP Targets, Normalization Factors, Weather  ──►   + regression (R², slope, intercept)
+In plain words: EIP = "how does energy relate to variables like temperature or production volume?" It plots energy vs. a variable, runs regression, and shows trends. Also computed live — no output table.
+
+Key takeaways
+Energy Data Management is the single source of truth — everything downstream reads from it
+Load Apportioning is a manual step — the user decides how to split energy across equipment
+SEU Flagging is the only module that auto-generates records from another module (Load Apportioning)
+SEC and EIP are read-only analysis views — they compute on the fly and store nothing except user config (POE %, filter presets, targets)

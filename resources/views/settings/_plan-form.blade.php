@@ -1,0 +1,7 @@
+<h3 class="fw-bold mb-4">Settings</h3>
+<p>Create Pricing Plan</p>
+<div class="row g-3">
+    <div class="col-md-6"><div class="card card-body text-center"><h5>One-Time Payment</h5><p class="small">Charge users a one-time payment fee to access the content.</p></div></div>
+    <div class="col-md-6"><div class="card card-body text-center border-primary"><h5><i class="bi bi-lightning-charge-fill text-primary"></i> Membership</h5><p class="small">Split the full bundle price over several monthly payments.</p></div></div>
+</div>
+<form class="mt-4"><div class="mb-3"><label class="form-label">Name*</label><input type="text" class="form-control" value="Monthly Subscription"></div><div class="row"><div class="col-md-6 mb-3"><label class="form-label">Price*</label><input type="text" class="form-control" value="RM -"></div><div class="col-md-6 mb-3"><label class="form-label">Billing Period*</label><select class="form-select"><option selected>Monthly</option></select></div></div><div class="form-check mb-3"><input type="checkbox" class="form-check-input" id="setup-fee"><label for="setup-fee">Charge a setup fee</label></div><div class="form-check mb-3"><input type="checkbox" class="form-check-input" id="usage-limit"><label for="usage-limit">Add usage limit</label></div><div class="row"><div class="col-6"><input type="number" class="form-control" value="7"></div><div class="col-6"><select class="form-select"><option selected>Days</option></select></div></div><div class="text-end mt-4"><button type="submit" class="btn btn-primary-light px-5">Save</button></div></form>

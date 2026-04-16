@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Load Apportioning Data Flow" id="load-flow">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1200" math="0" shadow="1">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a2e;strokeColor=none;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="200" y="30" width="1000" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="title" value="&lt;font color=&quot;#ffffff&quot; style=&quot;font-size:20px&quot;&gt;&lt;b&gt;LOAD APPORTIONING — Data Flow Diagram&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#aaaaaa&quot; style=&quot;font-size:11px&quot;&gt;Equipment / Building Load Breakdown by Energy Type&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="350" y="33" width="700" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ============ STEP 1: USER INPUT ============ -->
+        <mxCell id="s1_label" value="&lt;font style=&quot;font-size:12px&quot; color=&quot;#4472C4&quot;&gt;&lt;b&gt;STEP 1 — USER INPUT (Filter Bar)&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="60" y="105" width="350" height="25" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="year" value="&lt;b&gt;Year&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ccc&quot;&gt;e.g. 2026&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4472C4;fontColor=#ffffff;strokeColor=#2F5496;shadow=1;arcSize=12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="120" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="approach" value="&lt;b&gt;Approach&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ccc&quot;&gt;Equipment, Buildings, etc.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4472C4;fontColor=#ffffff;strokeColor=#2F5496;shadow=1;arcSize=12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="210" y="140" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="etypes" value="&lt;b&gt;Energy Types&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ccc&quot;&gt;Multi-select modal&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ED7D31;fontColor=#ffffff;strokeColor=#C55A11;shadow=1;arcSize=12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="420" y="140" width="160" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="umode" value="&lt;b&gt;Unit Mode&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ccc&quot;&gt;Energy GJ or Load %&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7030A0;fontColor=#ffffff;strokeColor=#5B259F;shadow=1;arcSize=12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="610" y="140" width="160" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- LOAD BUTTON -->
+        <mxCell id="load_btn" value="&lt;b&gt;LOAD&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#548235;fontColor=#ffffff;strokeColor=#375623;shadow=1;arcSize=12;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="800" y="145" width="100" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ============ STEP 2: FETCH DATA ============ -->
+        <mxCell id="s2_label" value="&lt;font style=&quot;font-size:12px&quot; color=&quot;#ED7D31&quot;&gt;&lt;b&gt;STEP 2 — AJAX FETCH&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="60" y="220" width="250" height="25" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="fetch" value="&lt;b&gt;GET /load-apportioning/data&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;{year, approach_id, energy_type_ids[], unit_mode}&lt;/font&gt;" style="shape=mxgraph.flowchart.document;whiteSpace=wrap;html=1;fillColor=#FCE4CC;strokeColor=#ED7D31;shadow=1;fontSize=11;size=0.1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="250" width="400" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="db" value="&lt;b&gt;load_apportioning&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;WHERE year, approach_id, energy_type_id IN (?), unit_mode&lt;br&gt;ORDER BY energy_type_id, sort_order&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#ED7D31;fontColor=#ffffff;strokeColor=#C55A11;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="560" y="240" width="380" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e_fb" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#ED7D31;strokeWidth=1.5;rounded=1;" edge="1" source="fetch" target="db" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ============ STEP 3: TWO MODES ============ -->
+        <mxCell id="s3_label" value="&lt;font style=&quot;font-size:12px&quot; color=&quot;#7030A0&quot;&gt;&lt;b&gt;STEP 3 — TWO CALCULATION MODES&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="60" y="355" width="400" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Mode A: Energy GJ -->
+        <mxCell id="mode_gj_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E2EFDA;strokeColor=#A9D18E;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="390" width="520" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="mode_gj_title" value="&lt;font style=&quot;font-size:14px&quot; color=&quot;#548235&quot;&gt;&lt;b&gt;MODE A: Energy (GJ)&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="200" y="395" width="250" height="25" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gj1" value="&lt;b&gt;User enters:&lt;/b&gt; GJ values per row&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;Editable input, grey background&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#A9D18E;fontSize=11;align=left;spacingLeft=15;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="430" width="480" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gj2" value="&lt;b&gt;System calculates:&lt;/b&gt; Load %&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;Readonly, white background&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#A9D18E;fontSize=11;align=left;spacingLeft=15;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="475" width="480" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gj3" value="&lt;font color=&quot;#548235&quot; style=&quot;font-size:13px&quot;&gt;&lt;b&gt;Load % = Row GJ / Table Total GJ × 100&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;arcSize=6;shadow=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="80" y="525" width="480" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gj4" value="&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;&lt;i&gt;Each energy type table independently totals to 100%&lt;/i&gt;&lt;/font&gt;" style="text;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="565" width="480" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- Mode B: Load Percentage -->
+        <mxCell id="mode_pct_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8DAF0;strokeColor=#C5A3D9;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="390" width="520" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="mode_pct_title" value="&lt;font style=&quot;font-size:14px&quot; color=&quot;#7030A0&quot;&gt;&lt;b&gt;MODE B: Load Percentage&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="760" y="395" width="280" height="25" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pct1" value="&lt;b&gt;User enters:&lt;/b&gt; % values per row&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;Editable input, grey background&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#C5A3D9;fontSize=11;align=left;spacingLeft=15;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="430" width="480" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pct2" value="&lt;b&gt;GJ column:&lt;/b&gt; Blank / readonly&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;No GJ calculation in this mode&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#C5A3D9;fontSize=11;align=left;spacingLeft=15;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="475" width="480" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pct3" value="&lt;font color=&quot;#C00000&quot; style=&quot;font-size:13px&quot;&gt;&lt;b&gt;Validation: Each table must sum to 100%&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C00000;fontColor=#ffffff;strokeColor=#8B0000;fontSize=11;arcSize=6;shadow=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="660" y="525" width="480" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pct4" value="&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;&lt;i&gt;Red warning shown if sum ≠ 100%&lt;/i&gt;&lt;/font&gt;" style="text;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="660" y="565" width="480" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- ============ STEP 4: ADDITIONAL OUTPUTS ============ -->
+        <mxCell id="s4_label" value="&lt;font style=&quot;font-size:12px&quot; color=&quot;#333&quot;&gt;&lt;b&gt;STEP 4 — ADDITIONAL ANALYSIS OUTPUTS&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="60" y="625" width="400" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- SEU Rollup -->
+        <mxCell id="seu_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6E4F0;strokeColor=#9DC3E6;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="660" width="520" height="230" as="geometry"/>
+        </mxCell>
+        <mxCell id="seu_title" value="&lt;font style=&quot;font-size:13px&quot; color=&quot;#2F5496&quot;&gt;&lt;b&gt;SEU Summary Rollup Table&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;Aggregates across ALL energy types&lt;/font&gt;" style="text;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="160" y="665" width="320" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="seu_table" value="&lt;table style='font-size:11px;border-collapse:collapse;width:100%;text-align:center'&gt;&lt;tr style='background:#2F5496;color:white;font-weight:bold'&gt;&lt;td style='padding:6px;border:1px solid #ddd'&gt;Energy Type&lt;/td&gt;&lt;td style='padding:6px;border:1px solid #ddd'&gt;Items&lt;/td&gt;&lt;td style='padding:6px;border:1px solid #ddd'&gt;Load (GJ)&lt;/td&gt;&lt;td style='padding:6px;border:1px solid #ddd'&gt;Load (%)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;Electricity&lt;/td&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;5&lt;/td&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;1,200.00&lt;/td&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;60.00%&lt;/td&gt;&lt;/tr&gt;&lt;tr style='background:#f9f9f9'&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;Natural Gas&lt;/td&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;3&lt;/td&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;800.00&lt;/td&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;40.00%&lt;/td&gt;&lt;/tr&gt;&lt;tr style='background:#E2EFDA;font-weight:bold'&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;Grand Total&lt;/td&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;8&lt;/td&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;2,000.00&lt;/td&gt;&lt;td style='padding:5px;border:1px solid #ddd'&gt;100.00%&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9DC3E6;fontSize=10;overflow=fill;shadow=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="80" y="705" width="480" height="140" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="seu_formula" value="&lt;font color=&quot;#2F5496&quot;&gt;&lt;b&gt;Load % = Type GJ / Grand Total GJ × 100&lt;/b&gt;&lt;/font&gt;" style="text;html=1;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="850" width="480" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- Monthly Resource Breakdown -->
+        <mxCell id="mr_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#E57373;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="660" width="530" height="230" as="geometry"/>
+        </mxCell>
+        <mxCell id="mr_title" value="&lt;font style=&quot;font-size:13px&quot; color=&quot;#C00000&quot;&gt;&lt;b&gt;Monthly Resource Breakdown&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;From energy_resource_usages (AJAX)&lt;/font&gt;" style="text;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="740" y="665" width="330" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mr_db" value="&lt;b&gt;energy_resource_usages&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;GET /load-apportioning/monthly-resource&lt;br&gt;WHERE month LIKE 'year-%'&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#C00000;fontColor=#ffffff;strokeColor=#8B0000;shadow=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="660" y="705" width="280" height="65" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mr_table" value="&lt;table style='font-size:10px;border-collapse:collapse;width:100%;text-align:center'&gt;&lt;tr style='background:#C00000;color:white;font-weight:bold'&gt;&lt;td style='padding:4px;border:1px solid #ddd'&gt;Month&lt;/td&gt;&lt;td style='padding:4px;border:1px solid #ddd'&gt;Meter A&lt;/td&gt;&lt;td style='padding:4px;border:1px solid #ddd'&gt;Meter B&lt;/td&gt;&lt;td style='padding:4px;border:1px solid #ddd'&gt;Total&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;Jan&lt;/td&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;100&lt;/td&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;50&lt;/td&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;150&lt;/td&gt;&lt;/tr&gt;&lt;tr style='background:#f5f5f5;font-weight:bold'&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;SUM&lt;/td&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;1200&lt;/td&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;600&lt;/td&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;1800&lt;/td&gt;&lt;/tr&gt;&lt;tr style='background:#E8F4F8'&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;&lt;b&gt;%&lt;/b&gt;&lt;/td&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;66.67&lt;/td&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;33.33&lt;/td&gt;&lt;td style='padding:3px;border:1px solid #ddd'&gt;100&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E57373;fontSize=10;overflow=fill;shadow=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="960" y="705" width="190" height="140" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e_mr" style="strokeColor=#C00000;strokeWidth=1.5;rounded=1;" edge="1" source="mr_db" target="mr_table" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ============ SAVE FLOW ============ -->
+        <mxCell id="s5_label" value="&lt;font style=&quot;font-size:12px&quot; color=&quot;#548235&quot;&gt;&lt;b&gt;SAVE FLOW&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="60" y="910" width="150" height="25" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="save1" value="&lt;b&gt;User clicks SAVE&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#548235;fontColor=#ffffff;strokeColor=#375623;shadow=1;arcSize=12;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="945" width="160" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="save2" value="&lt;b&gt;POST /load-apportioning/save&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;{year, approach_id, unit_mode, tables: {energyTypeId: rows[]}}&lt;/font&gt;" style="shape=mxgraph.flowchart.document;whiteSpace=wrap;html=1;fillColor=#FCE4CC;strokeColor=#ED7D31;shadow=1;fontSize=11;size=0.1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="940" width="380" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="save3" value="&lt;b&gt;Validate&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;If load_percentage mode:&lt;br&gt;each table sum = 100%?&lt;/font&gt;" style="shape=rhombus;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;shadow=1;fontSize=10;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="700" y="920" width="170" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="save4" value="&lt;b&gt;updateOrCreate&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Persist rows +&lt;br&gt;Delete removed&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#548235;fontColor=#ffffff;strokeColor=#375623;shadow=1;arcSize=8;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="930" y="935" width="170" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e_s1" style="strokeColor=#548235;strokeWidth=1.5;rounded=1;" edge="1" source="save1" target="save2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_s2" style="strokeColor=#ED7D31;strokeWidth=1.5;rounded=1;" edge="1" source="save2" target="save3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_s3" value="&lt;font color=&quot;#548235&quot;&gt;&lt;b&gt;Pass&lt;/b&gt;&lt;/font&gt;" style="strokeColor=#548235;strokeWidth=2;rounded=1;fontSize=10;" edge="1" source="save3" target="save4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

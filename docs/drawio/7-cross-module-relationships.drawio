@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Cross-Module Data Relationships" id="cross-module">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="1">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a2e;strokeColor=none;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="250" y="30" width="1100" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="title" value="&lt;font color=&quot;#ffffff&quot; style=&quot;font-size:20px&quot;&gt;&lt;b&gt;CROSS-MODULE DATA RELATIONSHIPS&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#aaaaaa&quot; style=&quot;font-size:11px&quot;&gt;Which database tables feed into which analytical modules&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="33" width="800" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ============ DATA LAYER ============ -->
+        <mxCell id="dl_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8F0;strokeColor=#F4B183;arcSize=4;dashed=1;dashPattern=5 5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="1520" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="dl_label" value="&lt;font style=&quot;font-size:14px&quot; color=&quot;#C55A11&quot;&gt;&lt;b&gt;DATA LAYER — Database Tables&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="60" y="108" width="350" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Config tables -->
+        <mxCell id="ed" value="&lt;b&gt;energy_data&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Meter Configs&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#4472C4;fontColor=#ffffff;strokeColor=#2F5496;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="145" width="170" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="edu" value="&lt;b&gt;energy_data_usages&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Monthly Energy GJ + Cost&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#C00000;fontColor=#ffffff;strokeColor=#8B0000;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="220" width="170" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="erd" value="&lt;b&gt;energy_resource_data&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Resource Configs&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#4472C4;fontColor=#ffffff;strokeColor=#2F5496;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="145" width="190" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="eru" value="&lt;b&gt;energy_resource_usages&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Monthly Resource GJ + Cost&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#C00000;fontColor=#ffffff;strokeColor=#8B0000;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="220" width="190" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mp" value="&lt;b&gt;monthly_productions&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Product Quantities&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#548235;fontColor=#ffffff;strokeColor=#375623;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="620" y="180" width="180" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mv" value="&lt;b&gt;monthly_variables&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;Area, Headcount, etc.&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#548235;fontColor=#ffffff;strokeColor=#375623;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="900" y="180" width="180" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="la_db" value="&lt;b&gt;load_apportioning&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot; color=&quot;#ddd&quot;&gt;User-Entered Rows&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#ED7D31;fontColor=#ffffff;strokeColor=#C55A11;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="180" width="180" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- FK arrows in data layer -->
+        <mxCell id="fk1" value="1:N" style="strokeColor=#2F5496;strokeWidth=1;fontSize=9;fontColor=#2F5496;fontStyle=1;" edge="1" source="ed" target="edu" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="fk2" value="1:N" style="strokeColor=#2F5496;strokeWidth=1;fontSize=9;fontColor=#2F5496;fontStyle=1;" edge="1" source="erd" target="eru" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ============ MODULE LAYER ============ -->
+        <mxCell id="ml_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F8FF;strokeColor=#9DC3E6;arcSize=4;dashed=1;dashPattern=5 5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="340" width="1520" height="350" as="geometry"/>
+        </mxCell>
+        <mxCell id="ml_label" value="&lt;font style=&quot;font-size:14px&quot; color=&quot;#2F5496&quot;&gt;&lt;b&gt;MODULE LAYER — Controllers + Views&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="60" y="348" width="400" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- SEC Module -->
+        <mxCell id="sec_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#70AD47;strokeColor=#548235;arcSize=6;shadow=1;opacity=90;" vertex="1" parent="1">
+          <mxGeometry x="60" y="390" width="320" height="270" as="geometry"/>
+        </mxCell>
+        <mxCell id="sec_title" value="&lt;font style=&quot;font-size:16px&quot; color=&quot;#ffffff&quot;&gt;&lt;b&gt;SEC Analysis&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="140" y="395" width="170" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="sec_reads" value="&lt;b&gt;Reads from:&lt;/b&gt;&lt;br&gt;• energy_data_usages (GJ)&lt;br&gt;• energy_resource_usages (GJ)&lt;br&gt;• monthly_productions (qty)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#A9D18E;fontSize=11;align=left;spacingLeft=10;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="80" y="430" width="280" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="sec_formula" value="&lt;b&gt;Formula:&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#C00000&quot; style=&quot;font-size:12px&quot;&gt;&lt;b&gt;SEC = (E × POE%) / Production&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;align=left;spacingLeft=10;arcSize=4;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="510" width="280" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sec_output" value="&lt;b&gt;Output:&lt;/b&gt; GJ per unit product&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;Matrix table, charts, export&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;fontSize=11;align=left;spacingLeft=10;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="80" y="565" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="sec_type" value="&lt;font style=&quot;font-size:9px&quot;&gt;Client-side calc | AJAX&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#548235;fontColor=#ffffff;strokeColor=#375623;fontSize=9;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="80" y="615" width="140" height="22" as="geometry"/>
+        </mxCell>
+
+        <!-- EIP Module -->
+        <mxCell id="eip_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4472C4;strokeColor=#2F5496;arcSize=6;shadow=1;opacity=90;" vertex="1" parent="1">
+          <mxGeometry x="420" y="390" width="320" height="270" as="geometry"/>
+        </mxCell>
+        <mxCell id="eip_title" value="&lt;font style=&quot;font-size:16px&quot; color=&quot;#ffffff&quot;&gt;&lt;b&gt;EIP Analysis&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="500" y="395" width="170" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="eip_reads" value="&lt;b&gt;Reads from:&lt;/b&gt;&lt;br&gt;• energy_data_usages (GJ)&lt;br&gt;• energy_resource_usages (GJ)&lt;br&gt;• monthly_variables (value)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9DC3E6;fontSize=11;align=left;spacingLeft=10;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="440" y="430" width="280" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="eip_formula" value="&lt;b&gt;Formula:&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#C00000&quot; style=&quot;font-size:12px&quot;&gt;&lt;b&gt;EIP = Total Energy / Variable&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;align=left;spacingLeft=10;arcSize=4;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="510" width="280" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="eip_output" value="&lt;b&gt;Output:&lt;/b&gt; GJ per variable unit&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;EIP table, charts, export&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;fontSize=11;align=left;spacingLeft=10;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="440" y="565" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="eip_type" value="&lt;font style=&quot;font-size:9px&quot;&gt;Client-side calc | AJAX&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2F5496;fontColor=#ffffff;strokeColor=#1B3A6B;fontSize=9;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="440" y="615" width="140" height="22" as="geometry"/>
+        </mxCell>
+
+        <!-- Load Module -->
+        <mxCell id="load_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ED7D31;strokeColor=#C55A11;arcSize=6;shadow=1;opacity=90;" vertex="1" parent="1">
+          <mxGeometry x="780" y="390" width="320" height="270" as="geometry"/>
+        </mxCell>
+        <mxCell id="load_title" value="&lt;font style=&quot;font-size:16px&quot; color=&quot;#ffffff&quot;&gt;&lt;b&gt;Load Apportioning&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="830" y="395" width="230" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="load_reads" value="&lt;b&gt;Reads from:&lt;/b&gt;&lt;br&gt;• load_apportioning (user data)&lt;br&gt;• energy_resource_usages&lt;br&gt;&amp;nbsp;&amp;nbsp;(monthly breakdown only)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#F4B183;fontSize=11;align=left;spacingLeft=10;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="800" y="430" width="280" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="load_formula" value="&lt;b&gt;Formula:&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#C00000&quot; style=&quot;font-size:12px&quot;&gt;&lt;b&gt;Load % = Row GJ / Total × 100&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;align=left;spacingLeft=10;arcSize=4;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="510" width="280" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="load_output" value="&lt;b&gt;Output:&lt;/b&gt; % per equipment/building&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;Tables per energy type, SEU rollup&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;fontSize=11;align=left;spacingLeft=10;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="800" y="565" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="load_type" value="&lt;font style=&quot;font-size:9px&quot;&gt;Client-side calc | AJAX&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C55A11;fontColor=#ffffff;strokeColor=#8B3A00;fontSize=9;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="800" y="615" width="140" height="22" as="geometry"/>
+        </mxCell>
+
+        <!-- Utility Module -->
+        <mxCell id="util_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7030A0;strokeColor=#5B259F;arcSize=6;shadow=1;opacity=90;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="390" width="320" height="270" as="geometry"/>
+        </mxCell>
+        <mxCell id="util_title" value="&lt;font style=&quot;font-size:16px&quot; color=&quot;#ffffff&quot;&gt;&lt;b&gt;Utility Apportioning&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="395" width="230" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="util_reads" value="&lt;b&gt;Reads from:&lt;/b&gt;&lt;br&gt;• energy_data_usages (GJ + cost)&lt;br&gt;• energy_resource_usages (GJ + cost)&lt;br&gt;• No production/variable data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#C5A3D9;fontSize=11;align=left;spacingLeft=10;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="430" width="280" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="util_formula" value="&lt;b&gt;Formula:&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#C00000&quot; style=&quot;font-size:12px&quot;&gt;&lt;b&gt;% = Type Total / Grand Total × 100&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;align=left;spacingLeft=10;arcSize=4;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="510" width="280" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="util_output" value="&lt;b&gt;Output:&lt;/b&gt; Energy vs Resource split&lt;br&gt;&lt;font style=&quot;font-size:10px&quot; color=&quot;#666&quot;&gt;Table, doughnut/bar charts, export&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;fontSize=11;align=left;spacingLeft=10;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="565" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="util_type" value="&lt;font style=&quot;font-size:9px&quot;&gt;Server-side calc | Page reload&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5B259F;fontColor=#ffffff;strokeColor=#3D1A6B;fontSize=9;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="615" width="160" height="22" as="geometry"/>
+        </mxCell>
+
+        <!-- ============ CONNECTION ARROWS ============ -->
+        <!-- energy_data_usages → SEC, EIP, Utility -->
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#C00000;rounded=1;" edge="1" source="edu" target="sec_bg" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#C00000;rounded=1;" edge="1" source="edu" target="eip_bg" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a3" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#C00000;rounded=1;" edge="1" source="edu" target="util_bg" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- energy_resource_usages → SEC, EIP, Load, Utility -->
+        <mxCell id="a4" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#C00000;dashed=1;dashPattern=8 4;rounded=1;" edge="1" source="eru" target="sec_bg" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a5" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#C00000;dashed=1;dashPattern=8 4;rounded=1;" edge="1" source="eru" target="eip_bg" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a6" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#C00000;dashed=1;dashPattern=8 4;rounded=1;" edge="1" source="eru" target="load_bg" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a7" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#C00000;dashed=1;dashPattern=8 4;rounded=1;" edge="1" source="eru" target="util_bg" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- monthly_productions → SEC -->
+        <mxCell id="a8" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#548235;rounded=1;" edge="1" source="mp" target="sec_bg" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- monthly_variables → EIP -->
+        <mxCell id="a9" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#548235;rounded=1;" edge="1" source="mv" target="eip_bg" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- load_apportioning → Load -->
+        <mxCell id="a10" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#ED7D31;rounded=1;" edge="1" source="la_db" target="load_bg" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ============ KEY INSIGHTS ============ -->
+        <mxCell id="ki_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;arcSize=4;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="720" width="1520" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="ki_title_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a2e;strokeColor=none;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="580" y="730" width="440" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="ki_title" value="&lt;font color=&quot;#ffffff&quot; style=&quot;font-size:13px&quot;&gt;&lt;b&gt;KEY INSIGHTS&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="680" y="732" width="240" height="26" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ki1" value="&lt;font color=&quot;#C00000&quot;&gt;&lt;b&gt;1.&lt;/b&gt;&lt;/font&gt;  &lt;b&gt;energy_data_usages&lt;/b&gt; is the most shared table — used by SEC, EIP, and Utility" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#E57373;fontSize=11;align=left;spacingLeft=15;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="775" width="700" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="ki2" value="&lt;font color=&quot;#C00000&quot;&gt;&lt;b&gt;2.&lt;/b&gt;&lt;/font&gt;  &lt;b&gt;energy_resource_usages&lt;/b&gt; is shared across &lt;b&gt;ALL 4 modules&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#E57373;fontSize=11;align=left;spacingLeft=15;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="815" width="700" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="ki3" value="&lt;font color=&quot;#C55A11&quot;&gt;&lt;b&gt;3.&lt;/b&gt;&lt;/font&gt;  &lt;b&gt;Load Apportioning is mostly standalone&lt;/b&gt; — main data is user-entered, not from other modules" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4CC;strokeColor=#F4B183;fontSize=11;align=left;spacingLeft=15;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="855" width="700" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="ki4" value="&lt;font color=&quot;#2F5496&quot;&gt;&lt;b&gt;4.&lt;/b&gt;&lt;/font&gt;  &lt;b&gt;SEC and EIP read the same energy data&lt;/b&gt; but divide by different denominators" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6E4F0;strokeColor=#9DC3E6;fontSize=11;align=left;spacingLeft=15;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="810" y="775" width="700" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="ki5" value="&lt;font color=&quot;#548235&quot;&gt;&lt;b&gt;5.&lt;/b&gt;&lt;/font&gt;  &lt;b&gt;No data flows between modules&lt;/b&gt; — they all read independently from source tables" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E2EFDA;strokeColor=#A9D18E;fontSize=11;align=left;spacingLeft=15;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="810" y="815" width="700" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="ki6" value="&lt;font color=&quot;#7030A0&quot;&gt;&lt;b&gt;6.&lt;/b&gt;&lt;/font&gt;  &lt;b&gt;Utility Apportioning&lt;/b&gt; is the only module using server-side calculation (no AJAX)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8DAF0;strokeColor=#C5A3D9;fontSize=11;align=left;spacingLeft=15;arcSize=6;" vertex="1" parent="1">
+          <mxGeometry x="810" y="855" width="700" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="940" width="1520" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_title" value="&lt;b&gt;LEGEND:&lt;/b&gt;" style="text;html=1;fontSize=11;align=left;fontColor=#333;" vertex="1" parent="1">
+          <mxGeometry x="60" y="950" width="80" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg1" value="&lt;b&gt;━━━&lt;/b&gt; Solid = energy_data_usages" style="text;html=1;fontSize=10;align=left;fontColor=#C00000;" vertex="1" parent="1">
+          <mxGeometry x="140" y="950" width="250" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2" value="&lt;b&gt;┅┅┅&lt;/b&gt; Dashed = energy_resource_usages" style="text;html=1;fontSize=10;align=left;fontColor=#C00000;" vertex="1" parent="1">
+          <mxGeometry x="140" y="970" width="260" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg3" value="&lt;b&gt;━━━&lt;/b&gt; Green = production / variable" style="text;html=1;fontSize=10;align=left;fontColor=#548235;" vertex="1" parent="1">
+          <mxGeometry x="430" y="950" width="250" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg4" value="&lt;b&gt;━━━&lt;/b&gt; Orange = user-entered data" style="text;html=1;fontSize=10;align=left;fontColor=#ED7D31;" vertex="1" parent="1">
+          <mxGeometry x="430" y="970" width="250" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg5" value="&lt;font color=&quot;#4472C4&quot;&gt;■&lt;/font&gt; Config tables&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#C00000&quot;&gt;■&lt;/font&gt; Transaction tables&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#548235&quot;&gt;■&lt;/font&gt; Production/Variable tables&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#ED7D31&quot;&gt;■&lt;/font&gt; User-entered data" style="text;html=1;fontSize=10;align=left;fontColor=#333;" vertex="1" parent="1">
+          <mxGeometry x="730" y="955" width="700" height="20" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
