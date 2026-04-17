@@ -1,5 +1,12 @@
 @extends('layouts.dashboard')
 
+@php
+    $isReadOnlyRole = in_array($userRole ?? '', [
+        'external_rem', 'internal_rem',
+        'external-rem', 'internal-rem',
+    ]);
+@endphp
+
 @section('title', 'Energy Data Management')
 
 @section('content')
@@ -152,6 +159,7 @@
                             <button class="btn btn-outline-primary" title="Calculator" onclick="openEnergyCalculator({{ $data->id }})">
                                 <i class="bi bi-calculator"></i>
                             </button>
+                            @if(!$isReadOnlyRole)
                             <button class="btn btn-outline-secondary" title="Conversion Factors" onclick="openEnergyConversionFactors({{ $data->id }}, '{{ addslashes($data->energy_type) }}')">
                                 <i class="bi bi-sliders"></i>
                             </button>
@@ -161,6 +169,7 @@
                             <button class="btn btn-outline-danger" onclick="confirmDeleteEnergyData({{ $data->id }})">
                                 <i class="bi bi-trash"></i>
                             </button>
+                            @endif
                         </div>
                     </td>
                 </tr>
@@ -214,6 +223,7 @@
                             <button class="btn btn-outline-primary" title="Calculator" onclick="openResourceCalculator({{ $data->id }})">
                                 <i class="bi bi-calculator"></i>
                             </button>
+                            @if(!$isReadOnlyRole)
                             <button class="btn btn-outline-secondary" title="Conversion Factors" onclick="openResourceConversionFactors({{ $data->id }}, '{{ addslashes($data->resource_type) }}')">
                                 <i class="bi bi-sliders"></i>
                             </button>
@@ -223,6 +233,7 @@
                             <button class="btn btn-outline-danger" onclick="confirmDeleteResourceData({{ $data->id }})">
                                 <i class="bi bi-trash"></i>
                             </button>
+                            @endif
                         </div>
                     </td>
                 </tr>
@@ -269,12 +280,14 @@
                         <button class="btn btn-outline-primary" title="Edit Product" onclick="openMonthlyProductionEditor({{ $data->id }})">
                             <i class="bi bi-calculator"></i>
                         </button>
+                        @if(!$isReadOnlyRole)
                         <button class="btn btn-outline-warning" onclick="editMonthlyProduction({{ $data->id }})">
                             <i class="bi bi-pencil"></i>
                         </button>
                         <button class="btn btn-outline-danger" onclick="confirmDeleteMonthlyProduction({{ $data->id }})">
                             <i class="bi bi-trash"></i>
                         </button>
+                        @endif
                     </div>
                 </td>
             </tr>
@@ -320,12 +333,14 @@
                         <button class="btn btn-outline-primary" title="Edit Variable" onclick="openMonthlyVariableEditor({{ $data->id }})">
                             <i class="bi bi-calculator"></i>
                         </button>
+                        @if(!$isReadOnlyRole)
                         <button class="btn btn-outline-warning" onclick="editMonthlyVariable({{ $data->id }})">
                             <i class="bi bi-pencil"></i>
                         </button>
                         <button class="btn btn-outline-danger" onclick="confirmDeleteMonthlyVariable({{ $data->id }})">
                             <i class="bi bi-trash"></i>
                         </button>
+                        @endif
                     </div>
                 </td>
             </tr>
@@ -1576,6 +1591,26 @@ function populateYearSelector(selectElement, dataYears) {
     return sortedYears;
 }
 
+const isReadOnlyRole = @json($isReadOnlyRole);
+
+function applyReadOnlyToModal(modalId) {
+    if (!isReadOnlyRole) return;
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    modal.querySelectorAll('input[type="text"], input[type="number"], input[type="file"]').forEach(el => {
+        el.disabled = true;
+    });
+
+    modal.querySelectorAll('button[type="submit"], .btn-save, [id*="saveBtn"], [id*="SaveBtn"]').forEach(el => {
+        el.style.display = 'none';
+    });
+
+    modal.querySelectorAll('.upload-section, [id*="FileInput"], [id*="FileName"], label[for*="File"]').forEach(el => {
+        el.style.display = 'none';
+    });
+}
+
 // ==================== ENERGY DATA FUNCTIONS ====================
 function clearEnergyCalculatorForm() {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -1679,6 +1714,7 @@ function openEnergyCalculator(id) {
         .catch(error => console.error('Error:', error))
         .finally(() => {
             new bootstrap.Modal(document.getElementById('energyCalculatorModal')).show();
+            applyReadOnlyToModal('energyCalculatorModal');
         });
 }
 
@@ -1912,6 +1948,7 @@ function openResourceCalculator(id) {
         .catch(error => console.error('Error:', error))
         .finally(() => {
             new bootstrap.Modal(document.getElementById('energyResourceCalculatorModal')).show();
+            applyReadOnlyToModal('energyResourceCalculatorModal');
         });
 }
 
@@ -2141,6 +2178,7 @@ function openMonthlyProductionEditor(id) {
         .catch(error => console.error('Error:', error))
         .finally(() => {
             new bootstrap.Modal(document.getElementById('monthlyProductionEditorModal')).show();
+            applyReadOnlyToModal('monthlyProductionEditorModal');
         });
 }
 
@@ -2290,6 +2328,7 @@ function openMonthlyVariableEditor(id) {
         .catch(error => console.error('Error:', error))
         .finally(() => {
             new bootstrap.Modal(document.getElementById('monthlyVariableCalculatorModal')).show();
+            applyReadOnlyToModal('monthlyVariableCalculatorModal');
         });
 }
 

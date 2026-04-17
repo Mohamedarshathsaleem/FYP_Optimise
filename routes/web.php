@@ -256,13 +256,25 @@ Route::middleware(['auth', 'superadmin'])->prefix('admin')->name('admin.')->grou
     Route::resource('users', Admin\UserController::class);
     Route::resource('permissions', Admin\PermissionController::class);
     Route::resource('roles', Admin\RoleController::class);
-    Route::get('/seu-flagging/export', [SeuFlaggingController::class, 'export'])
-        ->name('seu-flagging.export');
- // Energy Data Management
+
+    // User Permission Management
+    Route::resource('user-permissions', Admin\RolePermissionController::class)
+        ->only(['index', 'edit', 'update'])
+        ->parameters(['user-permissions' => 'user']);
+    Route::post('/user-permissions/bulk-update', [Admin\RolePermissionController::class, 'bulkUpdate'])->name('user-permissions.bulk-update');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Energy Data Management — EMT, Superadmin
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'permission:energy-data-management,view'])->prefix('admin')->name('admin.')->group(function () {
+    // Energy Data Management
     Route::get('/energy-data-management', [Admin\EnergyDataController::class, 'index'])
         ->name('energy-data-management.index');
     Route::get('/energy-data-management/summarize', [Admin\EnergyDataController::class, 'summarize'])
-    ->name('energy-data-management.summarize');
+        ->name('energy-data-management.summarize');
 
     // ==================== ENERGY DATA ROUTES ====================
     Route::post('/energy-data-management/store-data', [Admin\EnergyDataController::class, 'storeEnergyData'])
@@ -382,10 +394,6 @@ Route::middleware(['auth', 'superadmin'])->prefix('admin')->name('admin.')->grou
 
     Route::get('/monthly-variable/{id}/download-excel', [Admin\EnergyDataController::class, 'downloadVariableExcel'])
         ->name('admin.monthly-variable.download-excel');
-
-    // User Permission Management
-    Route::resource('user-permissions', Admin\RolePermissionController::class)->only(['index', 'edit', 'update']);
-    Route::post('/user-permissions/bulk-update', [Admin\UserPermissionController::class, 'bulkUpdate'])->name('user-permissions.bulk-update');
 
 });
 
