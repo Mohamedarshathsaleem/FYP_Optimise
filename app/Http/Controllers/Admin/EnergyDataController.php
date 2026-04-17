@@ -42,6 +42,7 @@ class EnergyDataController extends Controller
         }
 
         $energyUnits = EnergyUnit::where('is_active', true)->orderBy('sort_order')->get();
+        $userRole = auth()->user()->role ?? '';
 
         return view('admin.energy-data-management.index', compact(
             'energyData',
@@ -49,7 +50,8 @@ class EnergyDataController extends Controller
             'monthlyProductions',
             'monthlyVariables',
             'category',
-            'energyUnits'
+            'energyUnits',
+            'userRole'
         ));
     }
 
@@ -137,6 +139,8 @@ class EnergyDataController extends Controller
     
    public function storeEnergyData(Request $request)
 {
+        $this->denyIfReadOnlyRole();
+
     $request->validate([
         'category'     => 'required|string|max:255', 
         'energytype'   => 'required|string|max:255',
@@ -183,6 +187,8 @@ class EnergyDataController extends Controller
 
     public function updateEnergyData(Request $request, $id)
     {
+        $this->denyIfReadOnlyRole();
+
         $request->validate([
             'category'           => 'required|string|max:255',  
             'energytype'         => 'required|string|max:255',
@@ -219,6 +225,8 @@ class EnergyDataController extends Controller
 
     public function destroyEnergyData($id)
     {
+        $this->denyIfReadOnlyRole();
+
         try {
             EnergyData::findOrFail($id)->delete();
     
@@ -253,6 +261,8 @@ class EnergyDataController extends Controller
          */
     public function storeEnergyDataUsage(Request $request, $id)
     {
+        $this->denyIfReadOnlyRole();
+
         try {
             $energyData = EnergyData::findOrFail($id);
             
@@ -542,6 +552,8 @@ class EnergyDataController extends Controller
     
     public function storeEnergyResourceData(Request $request)
 {
+        $this->denyIfReadOnlyRole();
+
     $request->validate([
         'category'     => 'required|string|max:255',  
         'resourcetype' => 'required|string|max:255',
@@ -597,6 +609,8 @@ class EnergyDataController extends Controller
 
     public function updateEnergyResourceData(Request $request, $id)
     {
+        $this->denyIfReadOnlyRole();
+
         $request->validate([
             'category'            => 'required|string|max:255', 
             'resourcetype'        => 'required|string|max:255',
@@ -633,6 +647,8 @@ class EnergyDataController extends Controller
 
     public function destroyEnergyResourceData($id)
     {
+        $this->denyIfReadOnlyRole();
+
         try {
             EnergyResourceData::findOrFail($id)->delete();
     
@@ -664,6 +680,8 @@ class EnergyDataController extends Controller
 
     public function storeEnergyResourceUsage(Request $request, $id)
     {
+        $this->denyIfReadOnlyRole();
+
         try {
             $energyResourceData = EnergyResourceData::findOrFail($id);
             
@@ -923,6 +941,8 @@ class EnergyDataController extends Controller
     
     public function storeMonthlyProduction(Request $request)
     {
+        $this->denyIfReadOnlyRole();
+
         $request->validate([
             'category'        => 'required|string|max:255',  
             'production_type' => 'required|string|max:255'
@@ -953,6 +973,8 @@ class EnergyDataController extends Controller
 
    public function updateMonthlyProduction(Request $request, $id)
     {
+        $this->denyIfReadOnlyRole();
+
         $request->validate([
             'category'        => 'required|string|max:255',  
             'production_type' => 'required|string|max:255'
@@ -978,6 +1000,8 @@ class EnergyDataController extends Controller
 
     public function destroyMonthlyProduction($id)
     {
+        $this->denyIfReadOnlyRole();
+
         try {
             MonthlyProduction::findOrFail($id)->delete();
             
@@ -1016,6 +1040,8 @@ class EnergyDataController extends Controller
      */
     public function storeMonthlyProductionUsage(Request $request, $id)
     {
+        $this->denyIfReadOnlyRole();
+
         try {
             $monthlyProduction = MonthlyProduction::findOrFail($id);
             
@@ -1284,6 +1310,8 @@ class EnergyDataController extends Controller
     
     public function storeMonthlyVariable(Request $request)
     {
+        $this->denyIfReadOnlyRole();
+
         $request->validate([
             'category'      => 'required|string|max:255',  
             'variable_name' => 'required|string|max:255'
@@ -1314,6 +1342,8 @@ class EnergyDataController extends Controller
 
     public function updateMonthlyVariable(Request $request, $id)
     {
+        $this->denyIfReadOnlyRole();
+
         $request->validate([
             'category'      => 'required|string|max:255',  
             'variable_name' => 'required|string|max:255'
@@ -1339,6 +1369,8 @@ class EnergyDataController extends Controller
 
     public function destroyMonthlyVariable($id)
     {
+        $this->denyIfReadOnlyRole();
+
         try {
             MonthlyVariable::findOrFail($id)->delete();
             
@@ -1377,6 +1409,8 @@ class EnergyDataController extends Controller
      */
     public function storeMonthlyVariableUsage(Request $request, $id)
     {
+        $this->denyIfReadOnlyRole();
+
         try {
             $monthlyVariable = MonthlyVariable::findOrFail($id);
             
@@ -1609,6 +1643,8 @@ class EnergyDataController extends Controller
 
     public function storeEnergyDataConversionFactor(Request $request, $id)
     {
+        $this->denyIfReadOnlyRole();
+
         $request->validate([
             'from_unit' => 'required|string|max:20',
             'to_unit'   => 'required|string|max:20',
@@ -1628,6 +1664,8 @@ class EnergyDataController extends Controller
 
     public function destroyEnergyDataConversionFactor($id, $factorId)
     {
+        $this->denyIfReadOnlyRole();
+
         EnergyDataConversionFactor::where('energy_data_id', $id)->where('id', $factorId)->delete();
         return response()->json(['success' => true, 'message' => 'Conversion factor deleted.']);
     }
@@ -1674,6 +1712,8 @@ class EnergyDataController extends Controller
 
     public function storeEnergyResourceConversionFactor(Request $request, $id)
     {
+        $this->denyIfReadOnlyRole();
+
         $request->validate([
             'from_unit' => 'required|string|max:20',
             'to_unit'   => 'required|string|max:20',
@@ -1693,6 +1733,8 @@ class EnergyDataController extends Controller
 
     public function destroyEnergyResourceConversionFactor($id, $factorId)
     {
+        $this->denyIfReadOnlyRole();
+
         EnergyResourceConversionFactor::where('energy_resource_data_id', $id)->where('id', $factorId)->delete();
         return response()->json(['success' => true, 'message' => 'Conversion factor deleted.']);
     }
@@ -1748,6 +1790,15 @@ class EnergyDataController extends Controller
     /**
      * Get available categories
      */
+
+    private function denyIfReadOnlyRole(): void
+    {
+        $role = auth()->user()->role ?? '';
+        if (in_array($role, ['external_rem', 'internal_rem', 'external-rem', 'internal-rem'])) {
+            abort(403, 'Read-only access.');
+        }
+    }
+
     private function getCategories()
     {
         return ['Industrial', 'Commercial', 'Residential'];

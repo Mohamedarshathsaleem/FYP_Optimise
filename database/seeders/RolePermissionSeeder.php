@@ -30,39 +30,44 @@ class RolePermissionSeeder extends Seeder
             $superadmin->permissions()->sync(Permission::pluck('id'));
         }
 
-        // ── Top Management: view + export + approval ─────────────────────────
+        // ── Top Management: view + export on all operational modules;
+        //    approval only on EnPI & Baseline (strategic sign-off) ────────────
         if ($topMgmt) {
             $ids = Permission::where(function ($q) {
                 $q->where('name', 'like', '%.view')
                   ->orWhere('name', 'like', '%.export')
-                  ->orWhere('name', 'like', '%.approval');
+                  ->orWhere('name', 'enpi-baseline-management.approval');
             })->whereNotIn('name', $adminOnlyPerms)->pluck('id');
             $topMgmt->permissions()->sync($ids);
         }
 
-        // ── EMT: view + add + edit + import (no delete, no admin) ────────────
+        // ── EMT: full CRUD on Energy Data Management only ────────────────────
         if ($emt) {
-            $ids = Permission::where(function ($q) {
-                $q->where('name', 'like', '%.view')
-                  ->orWhere('name', 'like', '%.add')
-                  ->orWhere('name', 'like', '%.edit')
-                  ->orWhere('name', 'like', '%.import');
-            })->whereNotIn('name', $adminOnlyPerms)->pluck('id');
+            $ids = Permission::whereIn('name', [
+                'energy-data-management.view',
+                'energy-data-management.add',
+                'energy-data-management.edit',
+                'energy-data-management.delete',
+                'energy-data-management.import',
+            ])->pluck('id');
             $emt->permissions()->sync($ids);
         }
 
-        // ── Internal REM: view + add + edit + delete + export + approval ─────
+        // ── Internal REM: full access on Energy Review + EnPI/Baseline;
+        //    view-only on Energy Data Management ────────────────────────────
         if ($internalRem) {
-            $ids = Permission::where(function ($q) {
-                $q->where('name', 'like', '%.view')
-                  ->orWhere('name', 'like', '%.add')
-                  ->orWhere('name', 'like', '%.edit')
-                  ->orWhere('name', 'like', '%.delete')
-                  ->orWhere('name', 'like', '%.export')
-                  ->orWhere('name', 'like', '%.import')
-                  ->orWhere('name', 'like', '%.approval');
-            })->whereNotIn('name', $adminOnlyPerms)->pluck('id');
-            $internalRem->permissions()->sync($ids);
+            $reviewSlugs = [
+                'energy-review', 'sec-analysis', 'eip-analysis',
+                'load-apportioning', 'utility-apportioning', 'seu-flagging',
+                'enpi-baseline-management',
+            ];
+            $reviewIds = Permission::where(function ($q) use ($reviewSlugs) {
+                foreach ($reviewSlugs as $slug) {
+                    $q->orWhere('name', 'like', $slug . '.%');
+                }
+            })->pluck('id');
+            $dataViewId = Permission::where('name', 'energy-data-management.view')->pluck('id');
+            $internalRem->permissions()->sync($reviewIds->merge($dataViewId));
         }
 
         // ── External REM: view + export only (read-only audit role) ──────────
