@@ -2,42 +2,24 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Migrate load_apportioning to the full SEU-based schema.
-     *
-     * Handles two possible prior states:
-     *  A) Minimal schema (id, approach_id, name, timestamps)
-     *  B) arshath-30-01-26 refactor schema (adds year, energy_type_id,
-     *     unit_mode, row_label, energy_consumption_gj, load_percentage)
-     *
-     * Both are brought up to the full schema the model/controller expects.
-     */
+    // Disable transaction wrapping — PostgreSQL aborts the entire transaction
+    // on any DDL error, making subsequent hasColumn() calls fail with 25P02.
+    public bool $withinTransaction = false;
+
     public function up(): void
     {
-        // ── Step 1: Drop legacy composite indexes (ignore if they don't exist) ──
-        foreach (['la_unique_row', 'la_filter_idx'] as $idx) {
-            try {
-                Schema::table('load_apportioning', function (Blueprint $table) use ($idx) {
-                    $table->dropIndex($idx);
-                });
-            } catch (\Exception $e) {
-                // Index doesn't exist — safe to ignore
-            }
-        }
+        // ── Step 1: Drop legacy composite indexes using IF EXISTS (PostgreSQL-safe) ──
+        DB::statement('DROP INDEX IF EXISTS la_unique_row');
+        DB::statement('DROP INDEX IF EXISTS la_filter_idx');
 
         // ── Step 2: Drop legacy FK + column: energy_type_id ──
         if (Schema::hasColumn('load_apportioning', 'energy_type_id')) {
-            try {
-                Schema::table('load_apportioning', function (Blueprint $table) {
-                    $table->dropForeign(['energy_type_id']);
-                });
-            } catch (\Exception $e) {
-                // FK may already be gone
-            }
+            DB::statement('ALTER TABLE load_apportioning DROP CONSTRAINT IF EXISTS load_apportioning_energy_type_id_foreign');
             Schema::table('load_apportioning', function (Blueprint $table) {
                 $table->dropColumn('energy_type_id');
             });
