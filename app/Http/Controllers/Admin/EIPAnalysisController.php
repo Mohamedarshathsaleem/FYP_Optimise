@@ -34,19 +34,19 @@ class EIPAnalysisController extends Controller
         $resourceSources = EnergyResourceData::orderBy('id')->get();
         $variables = MonthlyVariable::orderBy('variable_name')->get();
 
-        $minYear = EnergyDataUsage::selectRaw('MIN(YEAR(CONCAT(month, "-01"))) as min_year')
+        $minYear = EnergyDataUsage::selectRaw('MIN(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as min_year')
             ->value('min_year')
-            ?? EnergyResourceUsage::selectRaw('MIN(YEAR(CONCAT(month, "-01"))) as min_year')
+            ?? EnergyResourceUsage::selectRaw('MIN(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as min_year')
                 ->value('min_year')
-            ?? MonthlyVariableUsage::selectRaw('MIN(YEAR(CONCAT(month, "-01"))) as min_year')
+            ?? MonthlyVariableUsage::selectRaw('MIN(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as min_year')
                 ->value('min_year')
             ?? now()->year - 3;
 
-        $maxYear = EnergyDataUsage::selectRaw('MAX(YEAR(CONCAT(month, "-01"))) as max_year')
+        $maxYear = EnergyDataUsage::selectRaw('MAX(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as max_year')
             ->value('max_year')
-            ?? EnergyResourceUsage::selectRaw('MAX(YEAR(CONCAT(month, "-01"))) as max_year')
+            ?? EnergyResourceUsage::selectRaw('MAX(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as max_year')
                 ->value('max_year')
-            ?? MonthlyVariableUsage::selectRaw('MAX(YEAR(CONCAT(month, "-01"))) as max_year')
+            ?? MonthlyVariableUsage::selectRaw('MAX(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as max_year')
                 ->value('max_year')
             ?? now()->year;
 
