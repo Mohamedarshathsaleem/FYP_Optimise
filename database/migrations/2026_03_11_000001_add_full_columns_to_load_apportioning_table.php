@@ -9,7 +9,7 @@ return new class extends Migration
 {
     // Disable transaction wrapping — PostgreSQL aborts the entire transaction
     // on any DDL error, making subsequent hasColumn() calls fail with 25P02.
-    public bool $withinTransaction = false;
+    public $withinTransaction = false;
 
     public function up(): void
     {
