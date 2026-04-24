@@ -3,6 +3,7 @@
 @section('title', 'SEU Flagging')
 
 @section('content')
+@php $canEditSeu = auth()->user()->hasPermission('seu-flagging.edit'); @endphp
 <div class="container-fluid">
     <!-- Page Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -107,11 +108,13 @@
                                 <label class="form-label fw-bold small">Notes</label>
                                 <input type="text" class="form-control form-control-sm" id="criteriaNotes" value="{{ $criteria->notes }}" placeholder="Optional...">
                             </div>
+                            @if($canEditSeu)
                             <div class="col-md-2 d-flex align-items-end">
                                 <button class="btn btn-primary btn-sm w-100" id="btnSaveCriteria" onclick="saveCriteria()">
                                     <i class="bi bi-check-lg me-1"></i>Save
                                 </button>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -434,6 +437,7 @@ var selectedYear = '{{ $selectedYear }}';
 var energySeus = @json($energySeus);
 var resourceSeus = @json($resourceSeus);
 var criteriaData = @json($criteria);
+var canEditSeu = {{ $canEditSeu ? 'true' : 'false' }};
 
 var seuChart = null;
 var toggleTargetId = null;
@@ -600,10 +604,12 @@ function buildSeuTableCard(title, seus, color, badgeClass, f) {
     html += '<thead style="background:' + color + '; color:white;">';
     html += '<tr><th class="py-3 ps-4">#</th><th class="py-3">Name of SEU</th><th class="py-3">Type of Energy</th><th class="py-3 text-end">Current GJ</th>';
     html += '<th class="py-3 text-end">% of Overall Usage</th><th class="py-3 text-center">Flagged</th>';
-    html += '<th class="py-3 text-center">Override</th><th class="py-3 text-center">Actions</th></tr></thead><tbody>';
+    html += '<th class="py-3 text-center">Override</th>';
+    if (canEditSeu) { html += '<th class="py-3 text-center">Actions</th>'; }
+    html += '</tr></thead><tbody>';
 
     if (seus.length === 0) {
-        html += '<tr><td colspan="8" class="text-center py-5 text-muted"><i class="bi bi-inbox" style="font-size:2rem;"></i>';
+        html += '<tr><td colspan="' + (canEditSeu ? 8 : 7) + '" class="text-center py-5 text-muted"><i class="bi bi-inbox" style="font-size:2rem;"></i>';
         html += '<p class="mt-2 mb-0">No data. Enter equipment in Load Apportioning.</p></td></tr>';
     } else {
         seus.forEach(function(seu, idx) {
@@ -615,9 +621,9 @@ function buildSeuTableCard(title, seus, color, badgeClass, f) {
             html += '<td class="text-end">' + (parseFloat(seu.overall_usage_pct) * 100).toFixed(2) + '%</td>';
             html += '<td class="text-center">';
             if (seu.is_flagged) {
-                html += '<span class="badge bg-danger"><i class="bi bi-flag-fill"></i> SEU</span>';
+                html += '<span class="badge bg-success"><i class="bi bi-flag-fill"></i> SEU</span>';
             } else {
-                html += '<span class="badge bg-secondary">Not SEU</span>';
+                html += '<span class="badge bg-warning text-dark">Not SEU</span>';
             }
             html += '</td>';
             html += '<td class="text-center">';
@@ -627,8 +633,10 @@ function buildSeuTableCard(title, seus, color, badgeClass, f) {
                 html += '<span class="text-muted">Auto</span>';
             }
             html += '</td>';
-            html += '<td class="text-center"><button class="btn btn-sm btn-outline-' + badgeClass + ' btn-toggle-flag" data-id="' + seu.id + '" title="Toggle flag">';
-            html += '<i class="bi ' + (seu.is_flagged ? 'bi-flag' : 'bi-flag-fill') + '"></i></button></td>';
+            if (canEditSeu) {
+                html += '<td class="text-center"><button class="btn btn-sm btn-outline-' + badgeClass + ' btn-toggle-flag" data-id="' + seu.id + '" title="Toggle flag">';
+                html += '<i class="bi ' + (seu.is_flagged ? 'bi-flag' : 'bi-flag-fill') + '"></i></button></td>';
+            }
             html += '</tr>';
         });
 
@@ -639,7 +647,7 @@ function buildSeuTableCard(title, seus, color, badgeClass, f) {
             var totalPct = 0;
             seus.forEach(function(s) { totalPct += parseFloat(s.overall_usage_pct) || 0; });
             html += '<td class="text-end">' + (totalPct * 100).toFixed(2) + '%</td>';
-            html += '<td colspan="3"></td></tr>';
+            html += '<td colspan="' + (canEditSeu ? 3 : 2) + '"></td></tr>';
         }
     }
 

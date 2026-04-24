@@ -1588,6 +1588,18 @@ function renderPieChart(filteredData, selectedProducts, productNames, convFactor
     html += '</button>';
     html += '</div>';
 
+    // Build shared legend from selectedProducts (same labels across all year pie charts)
+    var _secLegendHtml = '<div class="d-flex justify-content-center flex-wrap gap-4 mb-3 pie-shared-legend">';
+    var _secCI = 0;
+    selectedProducts.forEach(function(pid) {
+        if (pid === 'total') return;
+        var name = productNames[pid] || 'Product ' + pid;
+        _secLegendHtml += '<span class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;background:' + chartColors[_secCI % chartColors.length] + ';border-radius:2px;display:inline-block;"></span><small>' + escapeHtml(name) + '</small></span>';
+        _secCI++;
+    });
+    _secLegendHtml += '</div>';
+    html += _secLegendHtml;
+
     html += '<div class="row">';
     filteredData.forEach(function(yearData, idx) {
         html += '<div class="' + colClass + ' mb-4"><div style="position: relative; height: 350px;"><canvas id="pieChart_' + idx + '"></canvas></div></div>';
@@ -1632,7 +1644,7 @@ function renderPieChart(filteredData, selectedProducts, productNames, convFactor
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { position: 'bottom', labels: { font: { size: 11 } } },
+                    legend: { display: false },
                     title: {
                         display: true,
                         text: 'SEC ' + yearData.year + ' (' + unitLabel + ')',
