@@ -47,19 +47,19 @@ class SecAnalysisController extends Controller
         $resourceSources = EnergyResourceData::all();
 
         // Extract year from string format '2026-01' in usage tables
-        $minYear = EnergyDataUsage::selectRaw('MIN(YEAR(CONCAT(month, "-01"))) as min_year')
+        $minYear = EnergyDataUsage::selectRaw('MIN(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as min_year')
             ->value('min_year')
-            ?? EnergyResourceUsage::selectRaw('MIN(YEAR(CONCAT(month, "-01"))) as min_year')
+            ?? EnergyResourceUsage::selectRaw('MIN(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as min_year')
                 ->value('min_year')
-            ?? MonthlyProductionUsage::selectRaw('MIN(YEAR(CONCAT(month, "-01"))) as min_year')
+            ?? MonthlyProductionUsage::selectRaw('MIN(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as min_year')
                 ->value('min_year')
             ?? now()->year - 3;
 
-        $maxYear = EnergyDataUsage::selectRaw('MAX(YEAR(CONCAT(month, "-01"))) as max_year')
+        $maxYear = EnergyDataUsage::selectRaw('MAX(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as max_year')
             ->value('max_year')
-            ?? EnergyResourceUsage::selectRaw('MAX(YEAR(CONCAT(month, "-01"))) as max_year')
+            ?? EnergyResourceUsage::selectRaw('MAX(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as max_year')
                 ->value('max_year')
-            ?? MonthlyProductionUsage::selectRaw('MAX(YEAR(CONCAT(month, "-01"))) as max_year')
+            ?? MonthlyProductionUsage::selectRaw('MAX(CAST(SUBSTRING(month, 1, 4) AS INTEGER)) as max_year')
                 ->value('max_year')
             ?? now()->year;
         $years = range($minYear, max($maxYear, now()->year));
@@ -99,7 +99,7 @@ class SecAnalysisController extends Controller
 
             // Load all data for this year in bulk from usage tables
             // Query energy_data_usages instead of sec_energy_consumptions
-            $energyData = EnergyDataUsage::whereYear(DB::raw('CONCAT(month, "-01")'), $year)
+            $energyData = EnergyDataUsage::where('month', 'like', $year . '-%')
                 ->whereIn('energy_data_id', $energySourceIds)
                 ->get()
                 ->map(function($item) {
@@ -111,7 +111,7 @@ class SecAnalysisController extends Controller
                 ->groupBy('month');
 
             // Query energy_resource_usages instead of sec_resource_consumptions
-            $resourceData = EnergyResourceUsage::whereYear(DB::raw('CONCAT(month, "-01")'), $year)
+            $resourceData = EnergyResourceUsage::where('month', 'like', $year . '-%')
                 ->whereIn('energy_resource_data_id', $resourceSourceIds)
                 ->get()
                 ->map(function($item) {
@@ -122,7 +122,7 @@ class SecAnalysisController extends Controller
                 ->groupBy('month');
 
             // Query monthly_production_usages instead of sec_production_values
-            $productionData = MonthlyProductionUsage::whereYear(DB::raw('CONCAT(month, "-01")'), $year)
+            $productionData = MonthlyProductionUsage::where('month', 'like', $year . '-%')
                 ->with('monthlyProduction')
                 ->get()
                 ->map(function($item) use ($products) {

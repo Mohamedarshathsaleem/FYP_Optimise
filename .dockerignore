@@ -1,0 +1,10 @@
+vendor/
+node_modules/
+.env
+.env.*
+storage/logs/*.log
+public/build/
+.git/
+.claude/
+docs/
+tests/

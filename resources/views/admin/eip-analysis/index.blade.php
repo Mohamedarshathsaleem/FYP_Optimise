@@ -955,13 +955,17 @@ function renderChart(result, selectedYears, chartType, timePeriod, convFactor, u
 function renderPieChart(filteredData, convFactor, unitLabel, showReading) {
     var contentArea = document.getElementById('contentArea'), numYears = filteredData.length;
     var colClass = numYears <= 2 ? 'col-md-6' : (numYears <= 3 ? 'col-md-4' : 'col-md-3');
-    var html = '<div class="d-flex justify-content-between align-items-start mb-4"><div><h4 class="fw-bold mb-1" style="color:#2E5AA5;">EIP Analytic Graph</h4><p class="text-muted mb-0" style="font-size:0.9rem;">Statistics</p></div><button class="btn btn-primary btn-sm d-flex align-items-center gap-2" onclick="openGraphFilterModal()" style="border-radius:8px;padding:8px 18px;font-weight:600;"><i class="bi bi-funnel-fill"></i> Filter</button></div><div class="row">';
+    var sharedLegend = '<div class="d-flex justify-content-center align-items-center gap-4 mb-3 pie-shared-legend">' +
+        '<span class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;background:' + chartColors[0] + ';border-radius:2px;display:inline-block;"></span><small>Energy EIP</small></span>' +
+        '<span class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;background:' + chartColors[3] + ';border-radius:2px;display:inline-block;"></span><small>Resource EIP</small></span>' +
+        '</div>';
+    var html = '<div class="d-flex justify-content-between align-items-start mb-4"><div><h4 class="fw-bold mb-1" style="color:#2E5AA5;">EIP Analytic Graph</h4><p class="text-muted mb-0" style="font-size:0.9rem;">Statistics</p></div><button class="btn btn-primary btn-sm d-flex align-items-center gap-2" onclick="openGraphFilterModal()" style="border-radius:8px;padding:8px 18px;font-weight:600;"><i class="bi bi-funnel-fill"></i> Filter</button></div>' + sharedLegend + '<div class="row">';
     filteredData.forEach(function(yd, idx) { html += '<div class="' + colClass + ' mb-4"><div style="position:relative;height:350px;"><canvas id="pieChart_' + idx + '"></canvas></div></div>'; });
     html += '</div>'; contentArea.innerHTML = html;
     filteredData.forEach(function(yd, idx) {
         var vals = [parseFloat((yd.yearly_eip.eip_energy*convFactor).toFixed(4)), parseFloat((yd.yearly_eip.eip_resource*convFactor).toFixed(4))];
         var ctx = document.getElementById('pieChart_'+idx).getContext('2d'), pl = []; if (showReading) pl.push(ChartDataLabels);
-        new Chart(ctx, { type:'pie', data:{labels:['Energy EIP','Resource EIP'],datasets:[{data:vals,backgroundColor:[chartColors[0],chartColors[3]],borderWidth:2,borderColor:'#fff'}]}, plugins:pl, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11}}},title:{display:true,text:'EIP '+yd.year+' ('+unitLabel+')',font:{size:14,weight:'bold'}},datalabels:showReading?{color:'#fff',font:{size:11,weight:'bold'},formatter:function(v,c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return t>0?((v/t)*100).toFixed(1)+'%':'0%';}}:false}} });
+        new Chart(ctx, { type:'pie', data:{labels:['Energy EIP','Resource EIP'],datasets:[{data:vals,backgroundColor:[chartColors[0],chartColors[3]],borderWidth:2,borderColor:'#fff'}]}, plugins:pl, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'EIP '+yd.year+' ('+unitLabel+')',font:{size:14,weight:'bold'}},datalabels:showReading?{color:'#fff',font:{size:11,weight:'bold'},formatter:function(v,c){var t=c.dataset.data.reduce(function(a,b){return a+b;},0);return t>0?((v/t)*100).toFixed(1)+'%':'0%';}}:false}} });
     });
 }
 
