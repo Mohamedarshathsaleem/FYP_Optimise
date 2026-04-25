@@ -20,3 +20,9 @@ yarn-error.log
 /.claude
 /nul
 CLAUDE_PROJECT_INSTRUCTIONS.md
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/tests/e2e/.env.test
