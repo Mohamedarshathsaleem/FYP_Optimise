@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class BaselineModel extends Model
 {
@@ -36,6 +37,9 @@ class BaselineModel extends Model
         'independent_variable_type_x4',
         'monthly_production_id_x4',
         'monthly_variable_id_x4',
+        'approval_status',
+        'approved_by',
+        'approved_at',
     ];
 
     protected $casts = [
@@ -69,7 +73,21 @@ class BaselineModel extends Model
         );
     }
 
+    public function getApprovalBadgeColorAttribute(): string
+    {
+        return match($this->approval_status) {
+            'approved'    => 'success',
+            'disapproved' => 'danger',
+            default       => 'secondary',
+        };
+    }
+
     // ── Relationships ────────────────────────────────────────────────────────
+
+    public function approvedBy()
+    {
+        return $this->belongsTo(User::class, 'approved_by');
+    }
 
     public function energyData()
     {
