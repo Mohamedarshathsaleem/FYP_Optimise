@@ -244,6 +244,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/enpi-baseline-management/{id}', [App\Http\Controllers\BaselineModelController::class, 'destroy'])
         ->name('enpi-baseline-management.destroy');
 
+    Route::patch('/enpi-baseline-management/{id}/approve', [App\Http\Controllers\BaselineModelController::class, 'approve'])
+        ->name('enpi-baseline-management.approve');
+
+    Route::patch('/enpi-baseline-management/{id}/disapprove', [App\Http\Controllers\BaselineModelController::class, 'disapprove'])
+        ->name('enpi-baseline-management.disapprove');
+
 });
 
 /*

@@ -183,6 +183,34 @@ class BaselineModelController extends Controller
         }
     }
 
+    public function approve($id)
+    {
+        if (!auth()->user()->hasPermission('enpi-baseline-management.approval')) {
+            abort(403, 'Unauthorized');
+        }
+        $model = BaselineModel::findOrFail($id);
+        $model->update([
+            'approval_status' => 'approved',
+            'approved_by'     => auth()->id(),
+            'approved_at'     => now(),
+        ]);
+        return redirect()->back()->with('success', "Model \"{$model->model_name}\" has been approved.");
+    }
+
+    public function disapprove($id)
+    {
+        if (!auth()->user()->hasPermission('enpi-baseline-management.approval')) {
+            abort(403, 'Unauthorized');
+        }
+        $model = BaselineModel::findOrFail($id);
+        $model->update([
+            'approval_status' => 'disapproved',
+            'approved_by'     => auth()->id(),
+            'approved_at'     => now(),
+        ]);
+        return redirect()->back()->with('success', "Model \"{$model->model_name}\" has been disapproved.");
+    }
+
     // ──────────────────────────────────────────────────────────────────────────
     // API
     // ──────────────────────────────────────────────────────────────────────────

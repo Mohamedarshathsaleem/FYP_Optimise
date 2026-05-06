@@ -20,6 +20,8 @@
 .btn-calculate:hover  { background: #0d6efd !important; border-color: #0d6efd !important; color: #fff !important; }
 .btn-edit:hover       { background: #ffc107 !important; border-color: #ffc107 !important; color: #000 !important; }
 .btn-delete:hover     { background: #dc3545 !important; border-color: #dc3545 !important; color: #fff !important; }
+.btn-approve:hover    { background: #198754 !important; border-color: #198754 !important; color: #fff !important; }
+.btn-disapprove:hover { background: #dc3545 !important; border-color: #dc3545 !important; color: #fff !important; }
 
 .btn-calculate.loading { pointer-events: none; opacity: .7; }
 
@@ -105,6 +107,9 @@
                           style="background:rgba(255,255,255,.2);color:#fff;font-size:11px;">
                         {{ $model->year }}
                     </span>
+                    <span class="badge rounded-pill ms-1 bg-{{ $model->approvalBadgeColor }}" style="font-size:11px;">
+                        {{ ucfirst($model->approval_status) }}
+                    </span>
                 </div>
                 <div class="btn-group btn-group-sm gap-2">
                     <button type="button"
@@ -112,6 +117,28 @@
                             data-id="{{ $model->id }}" title="Calculate">
                         <i class="bi bi-calculator"></i>
                     </button>
+                    @if(auth()->user()->hasPermission('enpi-baseline-management.approval'))
+                    <form method="POST" action="{{ route('enpi-baseline-management.approve', $model->id) }}" class="d-inline">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit"
+                                class="btn btn-outline-light btn-approve"
+                                title="Approve"
+                                @if($model->approval_status === 'approved') disabled @endif>
+                            <i class="bi bi-check-circle"></i>
+                        </button>
+                    </form>
+                    <form method="POST" action="{{ route('enpi-baseline-management.disapprove', $model->id) }}" class="d-inline">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit"
+                                class="btn btn-outline-light btn-disapprove"
+                                title="Disapprove"
+                                @if($model->approval_status === 'disapproved') disabled @endif>
+                            <i class="bi bi-x-circle"></i>
+                        </button>
+                    </form>
+                    @endif
                     @if(auth()->user()->hasPermission('enpi-baseline-management.edit'))
                     <button type="button"
                             class="btn btn-outline-light btn-edit"
