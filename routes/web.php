@@ -135,8 +135,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/eip-analysis/targets', [Admin\EIPAnalysisController::class, 'storeTarget'])->name('eip-analysis.targets.store');
     Route::get('/eip-analysis/currency-rates', [Admin\EIPAnalysisController::class, 'getCurrencyRates'])->name('eip-analysis.currency-rates');
 
-    Route::get('/utility-apportioning', [Admin\UtilityApportioningController::class, 'index'])->name('utility-apportioning.index');
-
     Route::get('/load-apportioning-energy', [Admin\EnergyApportioningController::class, 'index'])->name('load-apportioning-energy.index');
     // SEU Flagging Routes
     Route::prefix('seu-flagging')->name('seu-flagging.')->group(function () {

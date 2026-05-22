@@ -49,16 +49,10 @@ class MenuSeeder extends Seeder
                         'order' => 3
                     ],
                     [
-                        'name' => 'Utility Apportioning',
-                        'slug' => 'utility-apportioning',
-                        'route' => 'utility-apportioning',
-                        'order' => 4
-                    ],
-                    [
                         'name' => 'SEU Flagging',
                         'slug' => 'seu-flagging',
                         'route' => 'seu-flagging',
-                        'order' => 5
+                        'order' => 4
                     ],
                 ]
             ],
