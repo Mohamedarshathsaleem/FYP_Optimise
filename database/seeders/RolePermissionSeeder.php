@@ -58,7 +58,7 @@ class RolePermissionSeeder extends Seeder
         if ($internalRem) {
             $reviewSlugs = [
                 'energy-review', 'sec-analysis', 'eip-analysis',
-                'load-apportioning', 'utility-apportioning', 'seu-flagging',
+                'load-apportioning', 'seu-flagging',
                 'enpi-baseline-management',
             ];
             $reviewIds = Permission::where(function ($q) use ($reviewSlugs) {
