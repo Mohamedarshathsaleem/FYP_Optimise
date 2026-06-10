@@ -495,8 +495,16 @@
 var csrfToken = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').getAttribute('content') : '';
 var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+function escapeHtml(str) {
+    if (!str) return '';
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
 // State
 var poeAllocations = {};
+var savedMonthlyPoe = {};
 var matrixData = null;
 
 window.closeInstructions = function() {
@@ -512,18 +520,44 @@ window.handlePOESelect = function() {
 window.openPOEModal = function() {
     var yearStart = document.getElementById('categorySelect').value;
     var yearEnd = document.getElementById('yearEndSelect').value;
+    var poeCategory = document.getElementById('poeSelect').value;
     document.getElementById('poeYear').textContent = yearStart && yearEnd ? '(' + yearStart + '-' + yearEnd + ')' : '';
 
-    document.querySelectorAll('.poe-input').forEach(function(input) {
-        var pid = input.dataset.productId;
-        if (poeAllocations[pid]) {
-            input.value = poeAllocations[pid];
-        }
-    });
-    updatePoeTotal();
+    function showModal() {
+        document.querySelectorAll('.poe-input').forEach(function(input) {
+            var pid = input.dataset.productId;
+            if (poeAllocations[pid]) {
+                input.value = poeAllocations[pid];
+            }
+        });
+        updatePoeTotal();
+        var modal = new bootstrap.Modal(document.getElementById('poeModal'));
+        modal.show();
+    }
 
-    var modal = new bootstrap.Modal(document.getElementById('poeModal'));
-    modal.show();
+    if (yearStart && yearEnd && poeCategory) {
+        fetch('/sec-analysis/monthly-poe?' + new URLSearchParams({
+            poe_category: poeCategory,
+            year_start: yearStart,
+            year_end: yearEnd
+        }), { headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': csrfToken } })
+        .then(function(r) { return r.json(); })
+        .then(function(res) {
+            if (res.success) {
+                savedMonthlyPoe = res.monthly || {};
+                if (res.yearly && Object.keys(poeAllocations).length === 0) {
+                    for (var pid in res.yearly) {
+                        var vals = Object.values(res.yearly[pid]);
+                        if (vals.length > 0) poeAllocations[pid] = vals[0];
+                    }
+                }
+            }
+            showModal();
+        })
+        .catch(function() { showModal(); });
+    } else {
+        showModal();
+    }
 };
 
 window.updatePoeTotal = function() {
@@ -579,7 +613,7 @@ function populateMonthlyPoeTable() {
             html += '<tr>';
             html += '<td class="py-1 fw-semibold">' + label + '</td>';
             products.forEach(function(p) {
-                var existingVal = '';
+                var existingVal = (savedMonthlyPoe[p.id] && savedMonthlyPoe[p.id][monthKey]) ? savedMonthlyPoe[p.id][monthKey] : '';
                 html += '<td class="py-1"><input type="number" class="form-control form-control-sm text-center mpoe-input" '
                     + 'data-product-id="' + p.id + '" data-month="' + monthKey + '" '
                     + 'value="' + existingVal + '" placeholder="0" min="0" max="100" step="0.01" '
@@ -590,6 +624,9 @@ function populateMonthlyPoeTable() {
         }
     }
     tbody.innerHTML = html;
+    tbody.querySelectorAll('.mpoe-input').forEach(function(inp) {
+        if (inp.value) updateMonthlyPoeTotal(inp);
+    });
 }
 
 window.updateMonthlyPoeTotal = function(input) {

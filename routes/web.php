@@ -110,6 +110,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/sec-analysis/data/production', [Admin\SecAnalysisController::class, 'storeProductionData'])->name('sec-analysis.store-production');
     Route::post('/sec-analysis/poe', [Admin\SecAnalysisController::class, 'storePoe'])->name('sec-analysis.store-poe');
     Route::post('/sec-analysis', [Admin\SecAnalysisController::class, 'store'])->name('sec-analysis.store');
+    Route::post('/sec-analysis/monthly-poe', [Admin\SecAnalysisController::class, 'storeMonthlyPoe'])->name('sec-analysis.store-monthly-poe');
+    Route::get('/sec-analysis/monthly-poe', [Admin\SecAnalysisController::class, 'getMonthlyPoe'])->name('sec-analysis.get-monthly-poe');
     Route::get('/sec-analysis/{id}', [Admin\SecAnalysisController::class, 'show'])->name('sec-analysis.show');
     Route::put('/sec-analysis/{id}', [Admin\SecAnalysisController::class, 'update'])->name('sec-analysis.update');
     Route::delete('/sec-analysis/{id}', [Admin\SecAnalysisController::class, 'destroy'])->name('sec-analysis.destroy');
@@ -170,8 +172,6 @@ Route::middleware('auth')->group(function () {
     });
 
     // SEC Analysis - Monthly POE
-    Route::post('/sec-analysis/monthly-poe', [Admin\SecAnalysisController::class, 'storeMonthlyPoe'])->name('sec-analysis.store-monthly-poe');
-    Route::get('/sec-analysis/monthly-poe', [Admin\SecAnalysisController::class, 'getMonthlyPoe'])->name('sec-analysis.get-monthly-poe');
 
     // EIP Analysis - Regression Data
     Route::post('/eip-analysis/data/regression', [Admin\EIPAnalysisController::class, 'getRegressionData'])->name('eip-analysis.regression-data');
