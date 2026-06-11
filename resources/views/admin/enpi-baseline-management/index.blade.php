@@ -142,7 +142,14 @@
                     @if(auth()->user()->hasPermission('enpi-baseline-management.edit'))
                     <button type="button"
                             class="btn btn-outline-light btn-edit"
-                            data-model="{{ htmlspecialchars(json_encode($model->toArray()), ENT_QUOTES, 'UTF-8') }}"
+                            data-model="{{ json_encode($model->only([
+                                'id','model_name','year','number_of_independent_variables',
+                                'dependent_variable_type','energy_data_id','energy_resource_id',
+                                'independent_variable_type_x1','monthly_production_id_x1','monthly_variable_id_x1',
+                                'independent_variable_type_x2','monthly_production_id_x2','monthly_variable_id_x2',
+                                'independent_variable_type_x3','monthly_production_id_x3','monthly_variable_id_x3',
+                                'independent_variable_type_x4','monthly_production_id_x4','monthly_variable_id_x4',
+                            ])) }}"
                             data-bs-toggle="modal" data-bs-target="#modelModal" title="Edit">
                         <i class="bi bi-pencil"></i>
                     </button>
@@ -279,7 +286,7 @@
                             Select Energy Source <span class="text-danger">*</span>
                         </label>
                         <select class="form-select" id="dependentSelect" required>
-                            <option value="">Loading…</option>
+                            <option value="">— Select a year to load options —</option>
                         </select>
                         <div class="form-text" id="dependentHint"></div>
                     </div>
@@ -317,7 +324,7 @@
                         <select class="form-select x-select" id="xSelect{{ $xi }}"
                                 data-xi="{{ $xi }}"
                                 {{ $xi === 1 ? 'required' : '' }}>
-                            <option value="">Loading…</option>
+                            <option value="">— Select a year to load options —</option>
                         </select>
                     </div>
                     @endforeach
@@ -376,6 +383,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Caches so we don't re-fetch for the same year
     let depOptionsCache = {};
     let indOptionsCache = {};
+
+    // Pre-selection values set by click handlers, consumed by show.bs.modal
+    let _pendingDepVal  = '';
+    let _pendingIndVals = {};
 
     // ── Fetch helpers ─────────────────────────────────────────────────────────
     function fetchDepOptions(year) {
@@ -453,7 +464,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 syncIndHiddens(el, i);
             });
         }).catch(() => {
-            depSel.innerHTML = '<option value="">Error loading options</option>';
+            const errOpt = '<option value="">Error loading options</option>';
+            depSel.innerHTML = errOpt;
+            [1,2,3,4].forEach(i => {
+                const el = document.getElementById('xSelect' + i);
+                if (el) el.innerHTML = errOpt;
+            });
         });
     }
 
@@ -511,7 +527,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('numIV').addEventListener('change', applyNumIV);
 
-    // ── Year change inside modal ───────────────────────────────────────────────
+    // ── Load dropdowns whenever the modal is about to be shown ───────────────
+    document.getElementById('modelModal').addEventListener('show.bs.modal', function () {
+        const year = document.getElementById('modalYear').value;
+        loadAllDropdowns(year, _pendingDepVal, _pendingIndVals);
+        _pendingDepVal  = '';
+        _pendingIndVals = {};
+    });
+
+    // ── Year change inside modal — reload without pre-selection ───────────────
     document.getElementById('modalYear').addEventListener('change', function () {
         loadAllDropdowns(this.value, '', {});
     });
@@ -537,11 +561,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('modelId').value = '';
         document.getElementById('submitBtn').textContent = 'Add Now';
 
-        // Set year to the currently selected page year and load options
         const pageYear = document.getElementById('yearSelect').value;
         document.getElementById('modalYear').value = pageYear;
         applyNumIV();
-        loadAllDropdowns(pageYear, '', {});
+        // Pre-selection: none for Add — show.bs.modal will call loadAllDropdowns
+        _pendingDepVal  = '';
+        _pendingIndVals = {};
     });
 
     // ── EDIT buttons ──────────────────────────────────────────────────────────
@@ -582,7 +607,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 else indCurrentVals[i] = '';
             });
 
-            loadAllDropdowns(model.year, depCurrentVal, indCurrentVals);
+            // Store pre-selection — show.bs.modal will call loadAllDropdowns
+            _pendingDepVal  = depCurrentVal;
+            _pendingIndVals = indCurrentVals;
         });
     });
 
