@@ -20,6 +20,7 @@ class SeuFlagging extends Model
         'overall_usage_pct',
         'enpi_reference',
         'is_flagged',
+        'auto_flagged',
         'is_manually_overridden',
         'override_reason',
         'load_apportioning_id',
@@ -33,6 +34,7 @@ class SeuFlagging extends Model
         'current_gj' => 'decimal:4',
         'overall_usage_pct' => 'decimal:4',
         'is_flagged' => 'boolean',
+        'auto_flagged' => 'boolean',
         'is_manually_overridden' => 'boolean',
         'sort_order' => 'integer',
     ];
@@ -103,9 +105,12 @@ class SeuFlagging extends Model
     // Methods
     public function toggleFlag($reason = null)
     {
-        $this->is_flagged = !$this->is_flagged;
-        $this->is_manually_overridden = true;
-        $this->override_reason = $reason;
+        $newFlagState = !$this->is_flagged;
+        $isManual = ($newFlagState !== (bool) $this->auto_flagged);
+
+        $this->is_flagged = $newFlagState;
+        $this->is_manually_overridden = $isManual;
+        $this->override_reason = $isManual ? $reason : null;
         $this->updated_by = auth()->id();
         $this->save();
     }
