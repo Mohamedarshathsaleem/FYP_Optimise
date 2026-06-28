@@ -142,7 +142,7 @@
                 <p>Are you sure you want to change the SEU flag status for this item?</p>
                 <div class="mb-3">
                     <label class="form-label fw-bold">Reason (optional)</label>
-                    <textarea class="form-control" id="toggleReason" rows="3" placeholder="Provide a reason for the manual override..."></textarea>
+                    <textarea class="form-control" id="toggleReason" rows="3" placeholder="Reason will appear below the Manual badge..."></textarea>
                 </div>
             </div>
             <div class="modal-footer border-0">
@@ -577,6 +577,9 @@ function displaySeuTable() {
     }
 
     document.getElementById('seuContentArea').innerHTML = html;
+    document.querySelectorAll('[data-bs-toggle="popover"]').forEach(function(el) {
+        bootstrap.Popover.getOrCreateInstance(el);
+    });
 
     // Attach toggle listeners
     document.querySelectorAll('.btn-toggle-flag').forEach(function(btn) {
@@ -628,7 +631,14 @@ function buildSeuTableCard(title, seus, color, badgeClass, f) {
             html += '</td>';
             html += '<td class="text-center">';
             if (seu.is_manually_overridden) {
-                html += '<span class="badge bg-warning text-dark" title="' + escapeHtml(seu.override_reason || '') + '"><i class="bi bi-pencil-fill"></i> Manual</span>';
+                var reasonHtml = '';
+                if (seu.override_reason) {
+                    reasonHtml = '<br><small class="text-muted fst-italic" style="font-size:0.72em;max-width:120px;display:inline-block;white-space:normal;">' + escapeHtml(seu.override_reason) + '</small>';
+                }
+                var popoverAttrs = seu.override_reason
+                    ? ' data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" data-bs-content="' + escapeHtml(seu.override_reason) + '"'
+                    : '';
+                html += '<span class="badge bg-warning text-dark"' + popoverAttrs + '><i class="bi bi-pencil-fill"></i> Manual</span>' + reasonHtml;
             } else {
                 html += '<span class="text-muted">Auto</span>';
             }
@@ -667,6 +677,9 @@ function displaySeuGraph() {
     html += '</div></div>';
 
     document.getElementById('seuContentArea').innerHTML = html;
+    document.querySelectorAll('[data-bs-toggle="popover"]').forEach(function(el) {
+        bootstrap.Popover.getOrCreateInstance(el);
+    });
     setTimeout(function() { renderSeuChart(); }, 50);
 }
 
@@ -956,16 +969,16 @@ function exportSeuChartPNG() {
 
 function exportSeuCSV() {
     var f = getSeuFilterValues();
-    var rows = [['Type', 'Name', 'Type of Energy', 'GJ', '% of Usage', 'Flagged', 'Override']];
+    var rows = [['Type', 'Name', 'Type of Energy', 'GJ', '% of Usage', 'Flagged', 'Override', 'Override Reason']];
 
     if (f.showEnergy) {
         filterByTypeOfEnergy(filterByFlag(energySeus, f.flagFilter), f.selectedTypeOfEnergy).forEach(function(s) {
-            rows.push(['Energy', s.seu_name, s.energy_type_name || '-', s.current_gj, (parseFloat(s.overall_usage_pct) * 100).toFixed(2) + '%', s.is_flagged ? 'SEU' : 'Not SEU', s.is_manually_overridden ? 'Manual' : 'Auto']);
+            rows.push(['Energy', s.seu_name, s.energy_type_name || '-', s.current_gj, (parseFloat(s.overall_usage_pct) * 100).toFixed(2) + '%', s.is_flagged ? 'SEU' : 'Not SEU', s.is_manually_overridden ? 'Manual' : 'Auto', s.override_reason || '']);
         });
     }
     if (f.showResource) {
         filterByTypeOfEnergy(filterByFlag(resourceSeus, f.flagFilter), f.selectedTypeOfEnergy).forEach(function(s) {
-            rows.push(['Resource', s.seu_name, s.energy_type_name || '-', s.current_gj, (parseFloat(s.overall_usage_pct) * 100).toFixed(2) + '%', s.is_flagged ? 'SEU' : 'Not SEU', s.is_manually_overridden ? 'Manual' : 'Auto']);
+            rows.push(['Resource', s.seu_name, s.energy_type_name || '-', s.current_gj, (parseFloat(s.overall_usage_pct) * 100).toFixed(2) + '%', s.is_flagged ? 'SEU' : 'Not SEU', s.is_manually_overridden ? 'Manual' : 'Auto', s.override_reason || '']);
         });
     }
 

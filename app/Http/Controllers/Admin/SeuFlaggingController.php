@@ -121,6 +121,7 @@ class SeuFlaggingController extends Controller
                             'overall_usage_pct' => $pct,
                             'enpi_reference' => 'GJ/tonne of production',
                             'is_flagged' => $isFlagged,
+                            'auto_flagged' => $isFlagged,
                             'load_apportioning_id' => $item->id,
                             'sort_order' => $sortOrder++,
                             'created_by' => auth()->id(),
@@ -129,6 +130,7 @@ class SeuFlaggingController extends Controller
                         $existing->update([
                             'current_gj' => $item->electricity_load_gj,
                             'overall_usage_pct' => $pct,
+                            'auto_flagged' => $isFlagged,
                             'load_apportioning_id' => $item->id,
                             'updated_by' => auth()->id(),
                         ]);
@@ -159,6 +161,7 @@ class SeuFlaggingController extends Controller
                             'overall_usage_pct' => $pct,
                             'load_apportioning_id' => $item->id,
                             'is_flagged' => $isFlagged,
+                            'auto_flagged' => $isFlagged,
                             'sort_order' => $sortOrder++,
                             'created_by' => auth()->id(),
                         ]);
@@ -166,6 +169,7 @@ class SeuFlaggingController extends Controller
                         $existing->update([
                             'current_gj' => $item->ng_load_gj,
                             'overall_usage_pct' => $pct,
+                            'auto_flagged' => $isFlagged,
                             'load_apportioning_id' => $item->id,
                             'updated_by' => auth()->id(),
                         ]);
