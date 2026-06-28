@@ -12,6 +12,7 @@ WORKDIR /var/www
 COPY . .
 
 ENV COMPOSER_MEMORY_LIMIT=-1
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
