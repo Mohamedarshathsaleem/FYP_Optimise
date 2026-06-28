@@ -15,9 +15,9 @@ return new class extends Migration
         });
 
         // Non-overridden rows: their current is_flagged IS the auto-calculated value
-        DB::statement('UPDATE seu_flagging SET auto_flagged = is_flagged WHERE is_manually_overridden = 0');
+        DB::statement('UPDATE seu_flagging SET auto_flagged = is_flagged WHERE is_manually_overridden = false');
         // Manually-overridden rows: best approximation — user toggled once from the opposite state
-        DB::statement('UPDATE seu_flagging SET auto_flagged = NOT is_flagged WHERE is_manually_overridden = 1');
+        DB::statement('UPDATE seu_flagging SET auto_flagged = NOT is_flagged WHERE is_manually_overridden = true');
     }
 
     public function down(): void
