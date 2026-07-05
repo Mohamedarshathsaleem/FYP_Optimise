@@ -67,7 +67,7 @@
                     class="form-control form-control-lg @error('password') is-invalid @enderror"
                     id="password"
                     name="password"
-                    placeholder="Min. 8 characters"
+                    placeholder="e.g. Sunshine8!"
                     required
                 >
                 <button type="button" class="toggle-pw" onclick="togglePw('password', this)" tabindex="-1">
@@ -88,7 +88,7 @@
                     class="form-control form-control-lg"
                     id="password_confirmation"
                     name="password_confirmation"
-                    placeholder="Min. 8 characters"
+                    placeholder="e.g. Sunshine8!"
                     required
                 >
                 <button type="button" class="toggle-pw" onclick="togglePw('password_confirmation', this)" tabindex="-1">

@@ -6,8 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use App\Models\User;
-use App\Models\Role; 
+use App\Models\Role;
 
 class AuthController extends Controller  // Extend Controller yang benar
 {
@@ -50,7 +51,7 @@ class AuthController extends Controller  // Extend Controller yang benar
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:8', 'confirmed'],
+            'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()],
         ]);
     
         $user = User::create([
