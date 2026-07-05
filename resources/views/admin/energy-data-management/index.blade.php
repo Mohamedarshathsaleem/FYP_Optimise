@@ -34,6 +34,18 @@
     </div>
 @endif
 
+@if($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Validation Error!</strong>
+        <ul class="mb-0 mt-1">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
+
 {{-- ================= HEADER ================= --}}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
@@ -1747,12 +1759,12 @@ function loadEnergyDataForYear(year) {
 
         tr.innerHTML = `
             <td style="width:12%; vertical-align:middle; text-align:center;">${month}</td>
-            <td style="width:25%;"><input type="text" name="monthly[${month}][usage]" data-month="${month}" class="form-control form-control-sm monthly-usage" value="${usage ? usage.usage_value : ''}" onchange="updateEnergyGJ(this)"></td>
+            <td style="width:25%;"><input type="number" min="0" step="any" name="monthly[${month}][usage]" data-month="${month}" class="form-control form-control-sm monthly-usage" value="${usage ? usage.usage_value : ''}" onchange="updateEnergyGJ(this)"></td>
             <td style="width:13%; text-align:center;">
                 <input type="hidden" name="monthly[${month}][unit]" data-month="${month}" class="energy-unit-hidden" value="${rowUnit}">
                 <span class="energy-unit-label fw-semibold">${rowLabel}</span>
             </td>
-            <td style="width:20%;"><input type="text" name="monthly[${month}][cost]" data-month="${month}" class="form-control form-control-sm monthly-cost" value="${usage && usage.cost ? usage.cost : ''}"></td>
+            <td style="width:20%;"><input type="number" min="0" step="any" name="monthly[${month}][cost]" data-month="${month}" class="form-control form-control-sm monthly-cost" value="${usage && usage.cost ? usage.cost : ''}"></td>
             <td style="width:30%;"><input type="text" name="monthly[${month}][gj]" data-month="${month}" class="form-control form-control-sm monthly-gj" value="${usage ? usage.usage_gj : ''}" readonly></td>
         `;
 
@@ -1981,12 +1993,12 @@ function loadResourceDataForYear(year) {
 
         tr.innerHTML = `
             <td style="width:15%;">${month}</td>
-            <td style="width:25%;"><input type="text" name="monthly[${month}][usage]" data-month="${month}" class="form-control form-control-sm resource-monthly-usage" value="${usage ? usage.usage_value : ''}" onchange="updateResourceGJ(this)"></td>
+            <td style="width:25%;"><input type="number" min="0" step="any" name="monthly[${month}][usage]" data-month="${month}" class="form-control form-control-sm resource-monthly-usage" value="${usage ? usage.usage_value : ''}" onchange="updateResourceGJ(this)"></td>
             <td style="width:15%; text-align:center;">
                 <input type="hidden" name="monthly[${month}][unit]" data-month="${month}" class="resource-unit-hidden" value="${rowUnit}">
                 <span class="resource-unit-label fw-semibold">${rowLabel}</span>
             </td>
-            <td style="width:20%;"><input type="text" name="monthly[${month}][cost]" data-month="${month}" class="form-control form-control-sm resource-monthly-cost" value="${usage && usage.cost ? usage.cost : ''}"></td>
+            <td style="width:20%;"><input type="number" min="0" step="any" name="monthly[${month}][cost]" data-month="${month}" class="form-control form-control-sm resource-monthly-cost" value="${usage && usage.cost ? usage.cost : ''}"></td>
             <td style="width:25%;"><input type="text" name="monthly[${month}][gj]" data-month="${month}" class="form-control form-control-sm resource-monthly-gj" value="${usage ? usage.usage_gj : ''}" readonly></td>
         `;
 
@@ -2206,7 +2218,9 @@ function loadProductionDataForYear(year) {
                 <span class="text-dark fw-semibold" style="font-size: 0.9rem;">${month}</span>
             </div>
             <div class="col-6">
-                <input type="text"
+                <input type="number"
+                       min="0"
+                       step="any"
                        name="production[${month}][amount]"
                        data-month="${month}"
                        class="form-control form-control-sm production-amount-input"
@@ -2357,7 +2371,8 @@ function loadVariableDataForYear(year) {
                 <span class="text-dark fw-semibold" style="font-size: 0.9rem;">${month}</span>
             </div>
             <div class="col-6">
-                <input type="text"
+                <input type="number"
+                       step="any"
                        name="variable[${month}][value]"
                        data-month="${month}"
                        class="form-control form-control-sm variable-value-input"
@@ -2491,27 +2506,37 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('energyCalculatorForm').addEventListener('submit', function(e) {
     const yearSelect = document.getElementById('energyYearSelect');
     const yearInput = document.getElementById('energyFormYear');
-    
-    console.log('Energy form submitting...');
-    console.log('Year from select:', yearSelect.value);
-    console.log('Year from hidden input:', yearInput.value);
-    
-    // Make sure year is set
+
     if (!yearInput.value && yearSelect.value) {
         yearInput.value = yearSelect.value;
-        console.log('Set year to:', yearInput.value);
     }
-    
-    // Check if file is uploaded
-    const fileInput = document.getElementById('energyFileInput');
-    if (fileInput.files.length > 0) {
-        console.log('File uploaded:', fileInput.files[0].name);
-    }
-    
-    // Verify year is set
+
     if (!yearInput.value) {
         e.preventDefault();
         alert('Please select a year before saving.');
+        return false;
+    }
+
+    const fileInput = document.getElementById('energyFileInput');
+    if (fileInput.files.length > 0) return true;
+
+    const invalidInputs = [];
+    this.querySelectorAll('.monthly-usage, .monthly-cost').forEach(function(input) {
+        const val = input.value.trim();
+        if (val === '') return;
+        const num = parseFloat(val);
+        if (isNaN(num)) {
+            invalidInputs.push('Value "' + val + '" is not a valid number.');
+        } else if (input.classList.contains('monthly-usage') && num < 0) {
+            invalidInputs.push('Usage values cannot be negative (got ' + val + ').');
+        } else if (input.classList.contains('monthly-cost') && num < 0) {
+            invalidInputs.push('Cost values cannot be negative (got ' + val + ').');
+        }
+    });
+
+    if (invalidInputs.length > 0) {
+        e.preventDefault();
+        alert('Please fix the following errors:\n\n' + [...new Set(invalidInputs)].join('\n'));
         return false;
     }
 });
@@ -2520,24 +2545,35 @@ document.getElementById('energyCalculatorForm').addEventListener('submit', funct
 document.getElementById('energyResourceCalculatorForm').addEventListener('submit', function(e) {
     const yearSelect = document.getElementById('resourceYearSelect');
     const yearInput = document.getElementById('resourceFormYear');
-    
-    console.log('Resource form submitting...');
-    console.log('Year from select:', yearSelect.value);
-    console.log('Year from hidden input:', yearInput.value);
-    
+
     if (!yearInput.value && yearSelect.value) {
         yearInput.value = yearSelect.value;
-        console.log('Set year to:', yearInput.value);
     }
-    
-    const fileInput = document.getElementById('resourceFileInput');
-    if (fileInput.files.length > 0) {
-        console.log('File uploaded:', fileInput.files[0].name);
-    }
-    
+
     if (!yearInput.value) {
         e.preventDefault();
         alert('Please select a year before saving.');
+        return false;
+    }
+
+    const fileInput = document.getElementById('resourceFileInput');
+    if (fileInput.files.length > 0) return true;
+
+    const invalidInputs = [];
+    this.querySelectorAll('.resource-monthly-usage, .resource-monthly-cost').forEach(function(input) {
+        const val = input.value.trim();
+        if (val === '') return;
+        const num = parseFloat(val);
+        if (isNaN(num)) {
+            invalidInputs.push('Value "' + val + '" is not a valid number.');
+        } else if (num < 0) {
+            invalidInputs.push('Usage and cost values cannot be negative (got ' + val + ').');
+        }
+    });
+
+    if (invalidInputs.length > 0) {
+        e.preventDefault();
+        alert('Please fix the following errors:\n\n' + [...new Set(invalidInputs)].join('\n'));
         return false;
     }
 });
@@ -2546,24 +2582,35 @@ document.getElementById('energyResourceCalculatorForm').addEventListener('submit
 document.getElementById('monthlyProductionEditorForm').addEventListener('submit', function(e) {
     const yearSelect = document.getElementById('productionYearSelect');
     const yearInput = document.getElementById('productionFormYear');
-    
-    console.log('Production form submitting...');
-    console.log('Year from select:', yearSelect.value);
-    console.log('Year from hidden input:', yearInput.value);
-    
+
     if (!yearInput.value && yearSelect.value) {
         yearInput.value = yearSelect.value;
-        console.log('Set year to:', yearInput.value);
     }
-    
-    const fileInput = document.getElementById('monthlyProductionEditorFile');
-    if (fileInput.files.length > 0) {
-        console.log('File uploaded:', fileInput.files[0].name);
-    }
-    
+
     if (!yearInput.value) {
         e.preventDefault();
         alert('Please select a year before saving.');
+        return false;
+    }
+
+    const fileInput = document.getElementById('monthlyProductionEditorFile');
+    if (fileInput.files.length > 0) return true;
+
+    const invalidInputs = [];
+    this.querySelectorAll('.production-amount-input').forEach(function(input) {
+        const val = input.value.trim();
+        if (val === '') return;
+        const num = parseFloat(val);
+        if (isNaN(num)) {
+            invalidInputs.push('Value "' + val + '" is not a valid number.');
+        } else if (num < 0) {
+            invalidInputs.push('Production amounts cannot be negative (got ' + val + ').');
+        }
+    });
+
+    if (invalidInputs.length > 0) {
+        e.preventDefault();
+        alert('Please fix the following errors:\n\n' + [...new Set(invalidInputs)].join('\n'));
         return false;
     }
 });
@@ -2572,24 +2619,33 @@ document.getElementById('monthlyProductionEditorForm').addEventListener('submit'
 document.getElementById('monthlyVariableCalculatorForm').addEventListener('submit', function(e) {
     const yearSelect = document.getElementById('variableYearSelect');
     const yearInput = document.getElementById('variableFormYear');
-    
-    console.log('Variable form submitting...');
-    console.log('Year from select:', yearSelect.value);
-    console.log('Year from hidden input:', yearInput.value);
-    
+
     if (!yearInput.value && yearSelect.value) {
         yearInput.value = yearSelect.value;
-        console.log('Set year to:', yearInput.value);
     }
-    
-    const fileInput = document.getElementById('monthlyVariableCalculatorFile');
-    if (fileInput.files.length > 0) {
-        console.log('File uploaded:', fileInput.files[0].name);
-    }
-    
+
     if (!yearInput.value) {
         e.preventDefault();
         alert('Please select a year before saving.');
+        return false;
+    }
+
+    const fileInput = document.getElementById('monthlyVariableCalculatorFile');
+    if (fileInput.files.length > 0) return true;
+
+    const invalidInputs = [];
+    this.querySelectorAll('.variable-value-input').forEach(function(input) {
+        const val = input.value.trim();
+        if (val === '') return;
+        const num = parseFloat(val);
+        if (isNaN(num)) {
+            invalidInputs.push('Value "' + val + '" is not a valid number.');
+        }
+    });
+
+    if (invalidInputs.length > 0) {
+        e.preventDefault();
+        alert('Please fix the following errors:\n\n' + [...new Set(invalidInputs)].join('\n'));
         return false;
     }
 });
