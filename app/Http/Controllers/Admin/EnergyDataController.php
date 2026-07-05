@@ -280,17 +280,27 @@ class EnergyDataController extends Controller
             // Manual input
             $monthlyData = $request->input('monthly', []);
             $year = $request->input('year');
-            
+
             if (empty($monthlyData)) {
                 return redirect()->back()->with('warning', 'Please either upload a file or enter data manually.');
             }
-            
+
             if (empty($year)) {
                 return redirect()->back()->with('error', 'Year is required.');
             }
-            
+
+            $request->validate([
+                'monthly.*.usage' => ['nullable', 'numeric', 'min:0'],
+                'monthly.*.cost'  => ['nullable', 'numeric', 'min:0'],
+            ], [
+                'monthly.*.usage.numeric' => 'Energy usage values must be numbers.',
+                'monthly.*.usage.min'     => 'Energy usage values cannot be negative.',
+                'monthly.*.cost.numeric'  => 'Cost values must be numbers.',
+                'monthly.*.cost.min'      => 'Cost values cannot be negative.',
+            ]);
+
             $savedCount = 0;
-            
+
             foreach ($monthlyData as $monthName => $data) {
                 if (empty($data['usage'])) continue;
                 
@@ -690,12 +700,23 @@ class EnergyDataController extends Controller
             }
             
             $monthlyData = $request->input('monthly', []);
-            
+
             if (empty($monthlyData)) {
                 return redirect()->back()->with('warning', 'Please either upload a file or enter data manually.');
             }
-            
+
             $year = $request->input('year', date('Y'));
+
+            $request->validate([
+                'monthly.*.usage' => ['nullable', 'numeric', 'min:0'],
+                'monthly.*.cost'  => ['nullable', 'numeric', 'min:0'],
+            ], [
+                'monthly.*.usage.numeric' => 'Energy resource usage values must be numbers.',
+                'monthly.*.usage.min'     => 'Energy resource usage values cannot be negative.',
+                'monthly.*.cost.numeric'  => 'Cost values must be numbers.',
+                'monthly.*.cost.min'      => 'Cost values cannot be negative.',
+            ]);
+
             $savedCount = 0;
 
             foreach ($monthlyData as $monthName => $data) {
@@ -711,7 +732,7 @@ class EnergyDataController extends Controller
 
                 $monthNumber = $monthMap[$monthName];
                 $monthKey = $year . '-' . $monthNumber;
-                
+
                 $usageValue = floatval(str_replace(',', '', $data['usage']));
                 $unit = $data['unit'] ?? 'L';
                 $cost = !empty($data['cost']) ? floatval(str_replace(',', '', $data['cost'])) : null;
@@ -1059,17 +1080,24 @@ class EnergyDataController extends Controller
             // Handle manual input
             $productionData = $request->input('production', []);
             $year = $request->input('year');
-            
+
             // Validate year
             if (empty($year)) {
                 return redirect()->back()->with('error', 'Year is required.');
             }
-            
+
             // Validate data exists
             if (empty($productionData)) {
                 return redirect()->back()->with('warning', 'Please either upload a file or enter data manually.');
             }
-            
+
+            $request->validate([
+                'production.*.amount' => ['nullable', 'numeric', 'min:0'],
+            ], [
+                'production.*.amount.numeric' => 'Production amount values must be numbers.',
+                'production.*.amount.min'     => 'Production amount values cannot be negative.',
+            ]);
+
             // Get unit from the global selector
             $unit = $request->input('production_unit', 'Gallon');
             
@@ -1419,11 +1447,17 @@ class EnergyDataController extends Controller
             }
             
             $variableData = $request->input('variable', []);
-            
+
             if (empty($variableData)) {
                 return redirect()->back()->with('warning', 'Please either upload a file or enter data manually.');
             }
-            
+
+            $request->validate([
+                'variable.*.value' => ['nullable', 'numeric'],
+            ], [
+                'variable.*.value.numeric' => 'Variable values must be numbers.',
+            ]);
+
             $year = $request->input('year', date('Y'));
             $savedCount = 0;
 
