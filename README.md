@@ -1,5 +1,23 @@
 # Energy Management System (EnMS) for Optimise Sdn. Bhd.
 
+[![E2E Tests](https://github.com/Mohamedarshathsaleem/FYP_Optimise/actions/workflows/e2e.yml/badge.svg)](https://github.com/Mohamedarshathsaleem/FYP_Optimise/actions/workflows/e2e.yml)
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?logo=mysql&logoColor=white)
+![Playwright](https://img.shields.io/badge/tested_with-Playwright-2EAD33?logo=playwright&logoColor=white)
+
+**An ISO 50001 energy-management platform that replaced an energy consultancy's spreadsheet workflow. It detects Significant Energy Uses automatically, builds regression baselines and gives 5 user roles their own dashboards.**
+
+<!-- TODO(Arshath): add the live URL once deployed (render.yaml and railway.toml are ready): -->
+<!-- 🔗 **Live demo:** https://fyp-optimise.onrender.com -->
+
+<!-- TODO(Arshath): add 2–3 screenshots (EnPI dashboard, SEU flagging, baseline regression) to docs/ and uncomment: -->
+<!-- <p align="center"><img src="docs/dashboard.png" width="45%"> <img src="docs/seu.png" width="45%"></p> -->
+
+## 👤 My role
+
+Solo final-year project, built during my part-time role at Optimise Systems Engineering. I owned the full SDLC: requirements gathering with the client's energy managers, UML/ERD design, Laravel implementation, an RBAC permission system, the Playwright E2E suite with GitHub Actions CI, and UAT with end users.
+
 > Final Year Project — Bachelor of Computer Science (Software Engineering) with Honours  
 > Faculty of Computing, Universiti Teknologi Malaysia (UTM)  
 > Author: Mohamed Arshath Bin Mohamed Saleem (A22EC0076)  
@@ -106,9 +124,40 @@ The system was developed using the **Waterfall Model**, progressing through:
 
 ---
 
+## Getting Started
+
+**Prerequisites:** PHP 8.3, Composer, Node.js 20, MySQL 8.
+
+```bash
+git clone https://github.com/Mohamedarshathsaleem/FYP_Optimise.git
+cd FYP_Optimise
+
+composer install
+npm ci && npm run build
+
+cp env.example .env          # set DB_DATABASE, DB_USERNAME, DB_PASSWORD
+php artisan key:generate
+php artisan migrate --seed   # creates the schema, reference data and one demo user per role
+
+php artisan serve            # http://127.0.0.1:8000
+```
+
+Run the end-to-end tests (with the app running):
+
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
+
+**Deployment:** `Dockerfile`, `render.yaml` (Render, Singapore region, managed Postgres) and `railway.toml` are included for one-click hosting.
+
+---
+
 ## Testing
 
-The system was validated through three levels of testing:
+**Automated:** 17 Playwright end-to-end tests cover authentication, role-based access control, dashboards and public pages. GitHub Actions runs them on every push against a fresh MySQL 8 database (see `.github/workflows/e2e.yml`).
+
+The system was also validated through three levels of manual testing:
 
 - **Functional Testing** — Verifies each feature works correctly in isolation
 - **Integration Testing** — Ensures modules work together as expected
@@ -168,3 +217,9 @@ The following existing EnMS platforms were reviewed during the literature study:
 ---
 
 > This project was submitted in fulfilment of the requirements for the Bachelor of Computer Science (Software Engineering) with Honours degree at Universiti Teknologi Malaysia.
+
+---
+
+## License
+
+Developed for Optimise Systems Engineering Sdn. Bhd. as an academic project. The source is shared publicly for portfolio and assessment purposes only. All rights reserved.
