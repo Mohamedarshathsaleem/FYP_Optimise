@@ -16,7 +16,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/.DS_Store
+.DS_Store
 /.claude
 /nul
 CLAUDE_PROJECT_INSTRUCTIONS.md

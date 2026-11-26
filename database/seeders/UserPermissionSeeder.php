@@ -6,11 +6,23 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\Support\SeedPassword;
 
 class UserPermissionSeeder extends Seeder
 {
     public function run(): void
     {
+        // Same default as UsersTableSeeder; one password for every demo account
+        $password = SeedPassword::resolve('password');
+
+        if ($password === null) {
+            $this->command?->warn('SEED_USER_PASSWORD not set in production; skipping demo users.');
+
+            return;
+        }
+
+        $hashedPassword = Hash::make($password);
+
         // Get roles
         $superadminRole = Role::where('name', 'superadmin')->first();
         $managementRole = Role::where('name', 'top-management')->first();
@@ -22,7 +34,7 @@ class UserPermissionSeeder extends Seeder
             ['email' => 'superadmin@example.com'],
             [
                 'name' => 'Super Admin',
-                'password' => Hash::make('superadmin123'),
+                'password' => $hashedPassword,
                 'role' => 'superadmin',
                 'default_role_id' => $superadminRole?->id,
             ]
@@ -36,7 +48,7 @@ class UserPermissionSeeder extends Seeder
             ['email' => 'topmanagement@example.com'],
             [
                 'name' => 'Top Management',
-                'password' => Hash::make('topmanagement123'),
+                'password' => $hashedPassword,
                 'role' => 'top-management',
                 'default_role_id' => $managementRole?->id,
             ]
@@ -50,7 +62,7 @@ class UserPermissionSeeder extends Seeder
             ['email' => 'rem@demo.com'],
             [
                 'name' => 'Internal REM',
-                'password' => Hash::make('password123'),
+                'password' => $hashedPassword,
                 'role' => 'rem',
                 'default_role_id' => $remRole?->id,
             ]
@@ -64,7 +76,7 @@ class UserPermissionSeeder extends Seeder
             ['email' => 'user@example.com'],
             [
                 'name' => 'Normal User',
-                'password' => Hash::make('user123'),
+                'password' => $hashedPassword,
                 'role' => 'user',
                 'default_role_id' => $userRole?->id,
             ]

@@ -19,6 +19,13 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
+    | Password for seeded demo accounts. Required in production — without it
+    | the user seeders are skipped (see Database\Seeders\Support\SeedPassword).
+    */
+
+    'seed_user_password' => env('SEED_USER_PASSWORD'),
+
+    /*
     |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
