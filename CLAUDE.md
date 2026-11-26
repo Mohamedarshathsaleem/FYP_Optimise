@@ -38,7 +38,7 @@ npm run test:e2e                 # Playwright (needs the app running on :8000)
    create known-password accounts in production.
 5. **Calculation changes need a check against known figures.** SEC, EIP and regression output
    (`BaselineModelController`, `EipFilterService`) must be verified against a worked example
-   before merge. State which example you used in the PR.
+   before merge.
 6. **Keep changes small and scoped.** One concern per PR. Don't reformat untouched code or add
    libraries without asking. The regression and statistics code is plain PHP on purpose.
 
